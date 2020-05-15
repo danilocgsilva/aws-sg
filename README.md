@@ -1,6 +1,6 @@
 # aws-sg (AWS Security Group)
 
-An wrapper around aws cloud lib to facilitates some development tasks
+An wrapper around aws cloud lib to facilitates some development tasks over the securities groups.
 
 ## Access resources directly from local development computer
 
