@@ -5,6 +5,6 @@ class Fetcher:
 
 
     def sgs_data(self):
-        return self.client.describe_securiry_groups()
+        return self.client.describe_security_groups()
 
 
