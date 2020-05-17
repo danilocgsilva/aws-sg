@@ -1,20 +1,27 @@
 from src.Client_Config import Client_Config
-from src.Fetcher import Fetcher
-from src.SG_Parser import SG_Parser
+from src.Helpers import print_single_region_data, fast_add_arguments, get_regions
+import argparse
 
 def main():
 
+    arguments_list = [
+        ['--profile', '-p'],
+        ['--region', '-r']
+    ]
+
+    parser = argparse.ArgumentParser()
+    parser = fast_add_arguments(arguments_list, parser)
+    args = parser.parse_args()
+
     client_config = Client_Config()
-    client = client_config.get_client()
 
-    fetcher = Fetcher()
-    fetcher.set_client(client)
+    if args.profile is not None:
+        client_config.set_profile(args.profile)
 
-    sg_parser = SG_Parser()
-    sgs_data = fetcher.sgs_data()
-    sg_parser.set_data(sgs_data)
-    security_group_list = sg_parser.list()
+    if args.region is not None:
+        print_single_region_data(args.region, client_config)
+    else:
+        regions = get_regions(client_config)
 
-    for sg in security_group_list:
-        print(sg.get_name())
+
     
