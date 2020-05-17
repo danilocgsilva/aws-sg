@@ -1,4 +1,4 @@
-import boto3
+from src.Client import Client
 import os
 
 class Client_Config:
@@ -14,5 +14,4 @@ class Client_Config:
 
 
     def get_client(self):
-        ec2client = boto3.client('ec2')
-        return ec2client
+        return Client()

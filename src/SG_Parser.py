@@ -1,7 +1,8 @@
 import json
 from src.SG import SG
+from src.Parser_Interface import Parser_Interface
 
-class SG_Parser:
+class SG_Parser(Parser_Interface):
 
     def set_string_data(self, string_data: str):
         self.data = json.loads(string_data)
@@ -13,7 +14,7 @@ class SG_Parser:
         return self
 
 
-    def list(self):
+    def list(self) -> list:
 
         sg_list = []
 

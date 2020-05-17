@@ -25,5 +25,3 @@ class test_SG(unittest.TestCase):
         security_groups_returned = self.sg_parser.list()
         self.assertTrue(isinstance(security_groups_returned, list))
 
-
-

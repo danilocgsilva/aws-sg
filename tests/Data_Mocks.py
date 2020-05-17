@@ -178,3 +178,37 @@ class Data_Mocks:
             "VpcId": "vpc-1fda238a"
         }
 '''
+
+    def get_regions_string_mocked_data(self) -> str:
+        return '''{
+    "Regions": [
+        {
+            "Endpoint": "ec2.sa-north-1.amazonaws.com",
+            "RegionName": "sa-north-1",
+            "OptInStatus": "opt-in-not-required"
+        },
+        {
+            "Endpoint": "ec2.ju-south-1.amazonaws.com",
+            "RegionName": "ju-south-1",
+            "OptInStatus": "opt-in-not-required"
+        },
+        {
+            "Endpoint": "ec2.mo-west-3.amazonaws.com",
+            "RegionName": "mo-west-3",
+            "OptInStatus": "opt-in-not-required"
+        }
+    ],
+    "ResponseMetadata": {
+        "RequestId": "1-2-3-4-5",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+            "x-amzn-requestid": "1-2-3-4-5",
+            "content-type": "text/xml;charset=UTF-8",
+            "vary": "accept-encoding",
+            "date": "Sat, 23 May 1920 23:28:08 GMT",
+            "server": "AmazonEC2"
+        },
+        "RetryAttempts": 0
+    }
+}
+'''

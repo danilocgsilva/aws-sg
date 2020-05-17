@@ -15,6 +15,7 @@ parser = argparse.ArgumentParser()
 parser = fast_add_arguments(arguments_list, parser)
 args = parser.parse_args()
 
+
 if args.profile is not None:
     client_config.set_profile(args.profile)
 
@@ -23,6 +24,4 @@ if args.region is not None:
 
 fetcher = Fetcher()
 fetcher.set_client(client_config.get_client())
-security_groups_data = fetcher.sgs_data()
-
-print(security_groups_data)
+print(fetcher.get_all_regions_data())
