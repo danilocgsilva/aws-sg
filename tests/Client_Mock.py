@@ -16,3 +16,8 @@ class Client_Mock(Client_Interface):
         data = json.loads(data_string)
         return data
 
+    def describe_db_instances(self):
+        data_mocks = Data_Mocks()
+        data_string = data_mocks.get_rds_request_string_mocked_data()
+        data = json.loads(data_string)
+        return data

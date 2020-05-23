@@ -212,3 +212,246 @@ class Data_Mocks:
     }
 }
 '''
+
+    def get_rds_request_string_mocked_data(self) -> str:
+        return '''{
+    "DBInstances": [
+        {
+            "DBInstanceIdentifier": "myinstance",
+            "DBInstanceClass": "db.t2.micro",
+            "Engine": "mysql",
+            "DBInstanceStatus": "available",
+            "MasterUsername": "master_name",
+            "DBName": "main_database",
+            "Endpoint": {
+                "Address": "main_database.akhsdgkagf.us-east-1.rds.amazonaws.com",
+                "Port": 3306,
+                "HostedZoneId": "asldjfhakslalkj"
+            },
+            "AllocatedStorage": 20,
+            "PreferredBackupWindow": "06:19-06:49",
+            "BackupRetentionPeriod": 7,
+            "DBSecurityGroups": [],
+            "VpcSecurityGroups": [
+                {
+                    "VpcSecurityGroupId": "sg-asdkljhkjhasdf",
+                    "Status": "active"
+                },
+                {
+                    "VpcSecurityGroupId": "sg-asdlfkjahfsd",
+                    "Status": "active"
+                }
+            ],
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "default.mysql5.6",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "AvailabilityZone": "us-east-1zz",
+            "DBSubnetGroup": {
+                "DBSubnetGroupName": "default",
+                "DBSubnetGroupDescription": "default",
+                "VpcId": "vpc-asdlkfjha",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetIdentifier": "subnet-adlkjhaflskjdh",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-aldksjfhalkjsdh",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-asdlkfhaklsjdh",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-alsdjfhalksjdh",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-asdbjaskjdhf",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-alkdjfhalkjfdh",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    }
+                ]
+            },
+            "PreferredMaintenanceWindow": "fri:04:33-fri:05:03",
+            "PendingModifiedValues": {},
+            "MultiAZ": false,
+            "EngineVersion": "5.6.41",
+            "AutoMinorVersionUpgrade": false,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "LicenseModel": "general-public-license",
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:mysql-5-6",
+                    "Status": "in-sync"
+                }
+            ],
+            "PubliclyAccessible": true,
+            "StorageType": "gp2",
+            "DbInstancePort": 0,
+            "StorageEncrypted": false,
+            "DbiResourceId": "db-lkjdhflakjsfhdl",
+            "CACertificateIdentifier": "rds-ca-2015",
+            "DomainMemberships": [],
+            "CopyTagsToSnapshot": false,
+            "MonitoringInterval": 0,
+            "DBInstanceArn": "arn:aws:rds:us-east-1:asdlkfjahskljfdh:db:alksjdfhklajh",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "PerformanceInsightsEnabled": false,
+            "DeletionProtection": false,
+            "AssociatedRoles": []
+        }
+    ],
+    "ResponseMetadata": {
+        "RequestId": "kjdhasdf-alksjdfh-sdfasd-asdkjf-kjdafh",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+            "x-amzn-requestid": "asldg-jkgsda-lskdajfh-alkjsdhf-alkjsdfhaskjhd",
+            "content-type": "text/xml",
+            "vary": "accept-encoding",
+            "date": "Sun, 24 May 2020 18:59:18 GMT"
+        },
+        "RetryAttempts": 0
+    }
+}
+'''
+
+    def get_json_string_from_single_rds(self) -> str:
+        return '''{
+            "DBInstanceIdentifier": "myinstancename",
+            "DBInstanceClass": "db.t2.micro",
+            "Engine": "mysql",
+            "DBInstanceStatus": "available",
+            "MasterUsername": "master_name",
+            "DBName": "main_database",
+            "Endpoint": {
+                "Address": "main_database.akhsdgkagf.us-east-1.rds.amazonaws.com",
+                "Port": 3306,
+                "HostedZoneId": "asldjfhakslalkj"
+            },
+            "AllocatedStorage": 20,
+            "PreferredBackupWindow": "06:19-06:49",
+            "BackupRetentionPeriod": 7,
+            "DBSecurityGroups": [],
+            "VpcSecurityGroups": [
+                {
+                    "VpcSecurityGroupId": "sg-asdkljhkjhasdf",
+                    "Status": "active"
+                },
+                {
+                    "VpcSecurityGroupId": "sg-asdlfkjahfsd",
+                    "Status": "active"
+                }
+            ],
+            "DBParameterGroups": [
+                {
+                    "DBParameterGroupName": "default.mysql5.6",
+                    "ParameterApplyStatus": "in-sync"
+                }
+            ],
+            "AvailabilityZone": "us-east-1zz",
+            "DBSubnetGroup": {
+                "DBSubnetGroupName": "default",
+                "DBSubnetGroupDescription": "default",
+                "VpcId": "vpc-asdlkfjha",
+                "SubnetGroupStatus": "Complete",
+                "Subnets": [
+                    {
+                        "SubnetIdentifier": "subnet-adlkjhaflskjdh",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-aldksjfhalkjsdh",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-asdlkfhaklsjdh",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-alsdjfhalksjdh",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-asdbjaskjdhf",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    },
+                    {
+                        "SubnetIdentifier": "subnet-alkdjfhalkjfdh",
+                        "SubnetAvailabilityZone": {
+                            "Name": "us-east-1z"
+                        },
+                        "SubnetStatus": "Active"
+                    }
+                ]
+            },
+            "PreferredMaintenanceWindow": "fri:04:33-fri:05:03",
+            "PendingModifiedValues": {},
+            "MultiAZ": false,
+            "EngineVersion": "5.6.41",
+            "AutoMinorVersionUpgrade": false,
+            "ReadReplicaDBInstanceIdentifiers": [],
+            "LicenseModel": "general-public-license",
+            "OptionGroupMemberships": [
+                {
+                    "OptionGroupName": "default:mysql-5-6",
+                    "Status": "in-sync"
+                }
+            ],
+            "PubliclyAccessible": true,
+            "StorageType": "gp2",
+            "DbInstancePort": 0,
+            "StorageEncrypted": false,
+            "DbiResourceId": "db-lkjdhflakjsfhdl",
+            "CACertificateIdentifier": "rds-ca-2015",
+            "DomainMemberships": [],
+            "CopyTagsToSnapshot": false,
+            "MonitoringInterval": 0,
+            "DBInstanceArn": "arn:aws:rds:us-east-1:asdlkfjahskljfdh:db:alksjdfhklajh",
+            "IAMDatabaseAuthenticationEnabled": false,
+            "PerformanceInsightsEnabled": false,
+            "DeletionProtection": false,
+            "AssociatedRoles": []
+        }
+'''        

@@ -1,8 +1,10 @@
 import unittest
 import sys
 sys.path.insert(1, '..')
+from src.Fetcher import Fetcher
 from src.SG_Parser import SG_Parser
-from tests.Data_Mocks import Data_Mocks
+from src.RDS_Parser import RDS_Parser
+from tests.Client_Mock import Client_Mock
 
 class test_SG(unittest.TestCase):
 
@@ -10,18 +12,45 @@ class test_SG(unittest.TestCase):
         super(test_SG, self).__init__(*args, **kwargs)
         self.sg_parser = SG_Parser()
 
-        data_mocks = Data_Mocks()
-
-        sample_json_data = data_mocks.get_sample_string_response()
-        self.sg_parser.set_string_data(sample_json_data)
+        client = Client_Mock()
+        sg_data = client.describe_security_groups()
+        self.sg_parser.set_data(sg_data)
 
 
     def test_correct_count_sg(self):
-        security_groups_returned = self.sg_parser.list()
+        security_groups_returned = self.sg_parser.get_list()
         self.assertEqual(3, len(security_groups_returned))
 
 
     def test_return_list(self):
-        security_groups_returned = self.sg_parser.list()
+        security_groups_returned = self.sg_parser.get_list()
         self.assertTrue(isinstance(security_groups_returned, list))
+
+
+    def test_is_rds_instance_name_exists_true(self):
+        client = Client_Mock()
+        rds_data = client.describe_db_instances()
+
+        rds_parser = RDS_Parser()
+        rds_parser.set_data(rds_data)
+
+        rds_name = "myinstance"
+
+        exists = self.sg_parser.is_rds_instance_name_exists(rds_name, client)
+
+        self.assertTrue(exists)
+
+
+    def test_is_rds_instance_name_exists_false(self):
+        client = Client_Mock()
+        rds_data = client.describe_db_instances()
+
+        rds_parser = RDS_Parser()
+        rds_parser.set_data(rds_data)
+
+        rds_name = "non_existent"
+
+        exists = self.sg_parser.is_rds_instance_name_exists(rds_name, client)
+
+        self.assertFalse(exists)
 

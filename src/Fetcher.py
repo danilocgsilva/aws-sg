@@ -4,11 +4,16 @@ class Fetcher:
 
     def set_client(self, client: Client):
         self.client = client
+        return self
 
 
-    def sgs_data(self) -> dict:
+    def get_sgs_data(self) -> dict:
         return self.client.describe_security_groups()
 
 
     def get_all_regions_data(self) -> dict:
         return self.client.describe_regions()
+
+
+    def get_rds_data(self, rds: str) -> dict:
+        return self.client.describe_db_instances()
