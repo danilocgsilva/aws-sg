@@ -51,7 +51,7 @@ def print_loop_regions_securities_groups(client_config: Client_Config):
         print_single_region_data(region, client_config)
 
 
-def print_regions_without_rds(args, client_config):
+def print_securities_groups(args, client_config):
     if args.region is not None:
         print_single_region_data(args.region, client_config)
     else:
@@ -59,8 +59,8 @@ def print_regions_without_rds(args, client_config):
 
 
 def print_securities_groups_from_rds_instance(rds_name):
-    client = Client()
-    fetcher = Fetcher().set_client(client)
+    
+    fetcher = Fetcher().set_client(Client())
     rds_data = fetcher.get_rds_data(rds_name)
     rds_parser = RDS_Parser().set_data(rds_data)
 

@@ -3,7 +3,6 @@ import boto3
 
 class Client(Client_Interface):
 
-
     def describe_security_groups(self) -> dict:
         self.aws_client = boto3.client('ec2')
         return self.aws_client.describe_security_groups()
@@ -17,3 +16,8 @@ class Client(Client_Interface):
     def describe_db_instances(self) -> dict:
         self.aws_client = boto3.client('rds')
         return self.aws_client.describe_db_instances()
+
+
+    def describe_specific_security_group(self, security_group: str):
+        self.aws_client = boto3.client('ec2')
+        return self.aws_client.describe_security_groups(GroupNames=[security_group])

@@ -17,11 +17,20 @@ class test_Fetcher(unittest.TestCase):
 
 
     def test_fetch_request_right_format_for_regions(self):
-        client = Client_Mock()
-        self.fetcher.set_client(client)
+        self.fetcher.set_client(Client_Mock())
         result_fetched = self.fetcher.get_all_regions_data()
         self.assertTrue(isinstance(result_fetched, dict))
 
 
+    def test_get_sgs_data_by_name(self):
+        self.fetcher.set_client(Client_Mock())
+        result_fetched = self.fetcher.get_sgs_data_by_name("allow-http")
+        self.assertTrue(isinstance(result_fetched, dict))
+
+
+    def test_get_sgs_data_by_non_existing_name(self):
+        self.fetcher.set_client(Client_Mock())
+        with self.assertRaises(Exception):
+            self.fetcher.get_sgs_data_by_name("non existent")
 
 

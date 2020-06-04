@@ -455,3 +455,389 @@ class Data_Mocks:
             "AssociatedRoles": []
         }
 '''        
+
+
+    def get_json_string_several_security_group(self) -> str:
+        return '''{
+    "SecurityGroups": [
+        {
+            "Description": "Allow ssh from my business",
+            "GroupName": "Allow ssh from my business",
+            "IpPermissions": [
+                {
+                    "FromPort": 22,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "234.33.147.232/8"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 22,
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "098472908375",
+            "GroupId": "sg-19982634857623",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "From my business"
+                }
+            ],
+            "VpcId": "vpc-2983479"
+        },
+        {
+            "Description": "SecurityGroup for ElasticBeanstalk environment",
+            "GroupName": "awseb-e-sadjkfa-stack-AWSEBSecurityGroup-asdfoiasdfiu",
+            "IpPermissions": [
+                {
+                    "FromPort": 80,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 80,
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "2984359283",
+            "GroupId": "sg-2034590283479",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "elasticbeanstalk:environment-id",
+                    "Value": "e-lasdlkjh"
+                },
+                {
+                    "Key": "aws:cloudformation:logical-id",
+                    "Value": "AWSEBSecurityGroup"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-name",
+                    "Value": "awseb-e-adsfadsl-stack"
+                },
+                {
+                    "Key": "elasticbeanstalk:environment-name",
+                    "Value": "some-random-name"
+                },
+                {
+                    "Key": "Name",
+                    "Value": "some-random-name"
+                },
+                {
+                    "Key": "aws:cloudformation:stack-id",
+                    "Value": "arn:aws:cloudformation:us-east-1:23984752983475:stack/awseb-e-sdfadgsdf-stack/986-fkg-ghd-sdfg-sdfgsd"
+                }
+            ],
+            "VpcId": "vpc-20349857209384"
+        },
+        {
+            "Description": "Remote Connection to Windows",
+            "GroupName": "rdp",
+            "IpPermissions": [
+                {
+                    "FromPort": 3389,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 3389,
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "203948572098347",
+            "GroupId": "sg-23452340987",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "VpcId": "vpc-23459876"
+        },
+        {
+            "Description": "Dynamic access for mysql",
+            "GroupName": "dynamic_mysql",
+            "IpPermissions": [
+                {
+                    "FromPort": 3306,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "202.17.188.12/16"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 3306,
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "356345345",
+            "GroupId": "sg-785639367",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "Dynamic mysql ip"
+                }
+            ],
+            "VpcId": "vpc-24352345"
+        },
+        {
+            "Description": "CloudDesktop",
+            "GroupName": "CloudDesktop",
+            "IpPermissions": [
+                {
+                    "FromPort": 22,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 22,
+                    "UserIdGroupPairs": []
+                },
+                {
+                    "FromPort": 3389,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 3389,
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "2340979087",
+            "GroupId": "sg-9768976243",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "VpcId": "vpc-987687665"
+        },
+        {
+            "Description": "default VPC security group",
+            "GroupName": "default",
+            "IpPermissions": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": [
+                        {
+                            "GroupId": "sg-9986795",
+                            "UserId": "23458792364"
+                        }
+                    ]
+                },
+                {
+                    "FromPort": 22,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 22,
+                    "UserIdGroupPairs": [
+                        {
+                            "GroupId": "sg-29348765",
+                            "UserId": "23458792364"
+                        }
+                    ]
+                },
+                {
+                    "FromPort": 21,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 21,
+                    "UserIdGroupPairs": [
+                        {
+                            "Description": "ftp",
+                            "GroupId": "sg-2345234",
+                            "UserId": "23458792364"
+                        }
+                    ]
+                },
+                {
+                    "FromPort": 3306,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 3306,
+                    "UserIdGroupPairs": [
+                        {
+                            "Description": "Description from user",
+                            "GroupId": "sg-878765765",
+                            "UserId": "23458792364"
+                        }
+                    ]
+                }
+            ],
+            "OwnerId": "23458792364",
+            "GroupId": "sg-87687875",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "VpcId": "vpc-2453098"
+        }
+    ],
+    "ResponseMetadata": {
+        "RequestId": "3563456-7345-756-243523-365364563",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+            "x-amzn-requestid": "3563456-7345-756-243523-365364563",
+            "content-type": "text/xml;charset=UTF-8",
+            "transfer-encoding": "chunked",
+            "vary": "accept-encoding",
+            "date": "Thu, 04 Jun 2020 19:59:18 GMT",
+            "server": "AmazonEC2"
+        },
+        "RetryAttempts": 0
+    }
+}'''
+
+    def get_json_string_filtered_sgs(self, security_group_name: str) -> str:
+
+        if security_group_name == "allow-http":
+            return '''{
+    "SecurityGroups": [
+        {
+            "Description": "Allows access to http protocol",
+            "GroupName": "allow-http",
+            "IpPermissions": [
+                {
+                    "FromPort": 80,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 80,
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "OwnerId": "2039845702934",
+            "GroupId": "sg-092498379087908",
+            "IpPermissionsEgress": [
+                {
+                    "IpProtocol": "-1",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "0.0.0.0/0"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "UserIdGroupPairs": []
+                }
+            ],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "Allow http"
+                }
+            ],
+            "VpcId": "vpc-857654764"
+        }
+    ],
+    "ResponseMetadata": {
+        "RequestId": "35463456-3456-7456-23452-2452234",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+            "x-amzn-requestid": "35463456-3456-7456-23452-2452234",
+            "content-type": "text/xml;charset=UTF-8",
+            "content-length": "1697",
+            "date": "Sat, 06 Jun 2020 18:58:04 GMT",
+            "server": "AmazonEC2"
+        },
+        "RetryAttempts": 0
+    }
+}'''
+        raise Exception()

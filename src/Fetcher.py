@@ -11,6 +11,10 @@ class Fetcher:
         return self.client.describe_security_groups()
 
 
+    def get_sgs_data_by_name(self, name: str) -> dict:
+        return self.client.describe_specific_security_group(name)
+
+
     def get_all_regions_data(self) -> dict:
         return self.client.describe_regions()
 

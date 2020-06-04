@@ -38,3 +38,15 @@ Some environments may have several profiles configured. Or is required to get a 
 ```
 awssg --profile <your_profile>
 ```
+
+You may want to know a list of securities groups from a specific rds. Type:
+
+```
+awssg --rds <your_rds>
+```
+
+(NOT DEVELOPED YET) List the rules from some specific security group:
+
+```
+awssg --rules-from <security_group_id>
+```

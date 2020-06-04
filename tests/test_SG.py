@@ -10,25 +10,21 @@ class test_SG(unittest.TestCase):
         super(test_SG, self).__init__(*args, **kwargs)
         self.sg = SG()
 
-        self.data_mocks = Data_Mocks()
+        self.sg.set_string_data(
+            Data_Mocks().get_single_security_group_string_data()
+        )
 
 
     def test_get_security_group_name(self):
-
-        self.sg.set_string_data(
-            self.data_mocks.get_single_security_group_string_data()
-        )
-
         self.assertEqual("my-first-sg", self.sg.get_name())
 
 
     def test_get_security_group_description(self):
-
-        self.sg.set_string_data(
-            self.data_mocks.get_single_security_group_string_data()
-        )
-
         self.assertEqual("Access from the backery", self.sg.get_description())
+
+
+    def test_get_rules_type(self):
+        self.assertTrue(isinstance(self.sg.get_rules(), list))
 
 
 

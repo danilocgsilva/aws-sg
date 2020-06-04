@@ -18,4 +18,8 @@ class SG:
         return self.data["Description"]
 
 
+    def get_rules(self) -> list:
+        return []
+
+
 

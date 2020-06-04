@@ -21,8 +21,8 @@ if args.profile is not None:
 if args.region is not None:
     client_config.set_region(args.region)
 
-fetcher = Fetcher()
-fetcher.set_client(client_config.get_client())
-security_groups_data = fetcher.sgs_data()
+security_groups_data = Fetcher()\
+    .set_client(client_config.get_client())\
+    .get_sgs_data()
 
 print(security_groups_data)
