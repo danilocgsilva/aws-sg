@@ -27,4 +27,8 @@ class test_SG(unittest.TestCase):
         self.assertTrue(isinstance(self.sg.get_rules(), list))
 
 
+    def test_get_rules_count(self):
+        rules_list = self.sg.get_rules()
+        expected_rules_count = 1
+        self.assertEqual(expected_rules_count, len(rules_list))
 

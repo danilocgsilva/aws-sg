@@ -841,3 +841,18 @@ class Data_Mocks:
     }
 }'''
         raise Exception()
+
+    def get_string_single_ip_permission(self) -> str:
+        return '''{
+    "FromPort": 22,
+    "IpProtocol": "tcp",
+    "IpRanges": [
+        {
+            "CidrIp": "210.64.32.200/32"
+        }
+    ],
+    "Ipv6Ranges": [],
+    "PrefixListIds": [],
+    "ToPort": 22,
+    "UserIdGroupPairs": []
+}'''

@@ -1,3 +1,4 @@
+from src.Ip_Permission import Ip_Permission
 import json
 
 class SG:
@@ -19,7 +20,13 @@ class SG:
 
 
     def get_rules(self) -> list:
-        return []
+
+        permissions = []
+
+        for permission_data in self.data["IpPermissions"]:
+            permissions.append(Ip_Permission().set_string_data(permission_data))
+
+        return permissions
 
 
 
