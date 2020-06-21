@@ -27,6 +27,3 @@ class SG:
             permissions.append(Ip_Permission().set_string_data(permission_data))
 
         return permissions
-
-
-

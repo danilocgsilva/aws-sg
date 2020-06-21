@@ -153,7 +153,21 @@ class Data_Mocks:
         return '''{
             "Description": "Access from the backery",
             "GroupName": "my-first-sg",
-            "IpPermissions": [],
+            "IpPermissions": [
+                {
+                    "FromPort": 3306,
+                    "IpProtocol": "tcp",
+                    "IpRanges": [
+                        {
+                            "CidrIp": "189.18.172.95/32"
+                        }
+                    ],
+                    "Ipv6Ranges": [],
+                    "PrefixListIds": [],
+                    "ToPort": 3306,
+                    "UserIdGroupPairs": []
+                }
+            ],
             "OwnerId": "123324134",
             "GroupId": "sg-2f31fa12094",
             "IpPermissionsEgress": [

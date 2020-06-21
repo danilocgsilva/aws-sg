@@ -28,4 +28,3 @@ def main():
         print_securities_groups_from_rds_instance(args.rds)
     else:
         print_securities_groups(args, client_config)
-
