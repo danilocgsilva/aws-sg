@@ -24,6 +24,6 @@ class SG:
         permissions = []
 
         for permission_data in self.data["IpPermissions"]:
-            permissions.append(Ip_Permission().set_string_data(permission_data))
+            permissions.append(Ip_Permission().set_data(permission_data))
 
         return permissions
