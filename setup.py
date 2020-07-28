@@ -16,8 +16,8 @@ setup(
     url="https://github.com/danilocgsilva/aws-sg",
     author="Danilo Silva",
     author_email="contact@danilocgsilva.me",
-    packages=["src"],
-    entry_points={"console_scripts": ["awssg=src.__main__:main"],},
+    packages=["awssg"],
+    entry_points={"console_scripts": ["awssg=awssg.__main__:main"],},
     include_package_data=True
 )
 
