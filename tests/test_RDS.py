@@ -1,6 +1,6 @@
 import unittest
 from tests.Data_Mocks import Data_Mocks
-from src.RDS import RDS
+from awssg.RDS import RDS
 
 class test_RDS(unittest.TestCase):
 

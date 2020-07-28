@@ -1,5 +1,5 @@
-from src.Client import Client
-from src.Client_Config_Interface import Client_Config_Interface
+from awssg.Client import Client
+from awssg.Client_Config_Interface import Client_Config_Interface
 import os
 
 class Client_Config(Client_Config_Interface):

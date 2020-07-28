@@ -1,5 +1,5 @@
 import unittest
-from src.Helpers import get_regions, readable_single_region_data
+from awssg.Helpers import get_regions, readable_single_region_data
 from tests.Client_Mock import Client_Mock
 from tests.Client_Config_Mock import Client_Config_Mock
 

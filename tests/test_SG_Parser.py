@@ -1,9 +1,9 @@
 import unittest
 import sys
 sys.path.insert(1, '..')
-from src.Fetcher import Fetcher
-from src.SG_Parser import SG_Parser
-from src.RDS_Parser import RDS_Parser
+from awssg.Fetcher import Fetcher
+from awssg.SG_Parser import SG_Parser
+from awssg.RDS_Parser import RDS_Parser
 from tests.Client_Mock import Client_Mock
 
 class test_SG(unittest.TestCase):

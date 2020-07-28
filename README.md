@@ -45,6 +45,13 @@ You may want to know a list of securities groups from a specific rds. Type:
 awssg --rds <your_rds>
 ```
 
+Create a brand new security group.
+
+```
+awssg --create my-suffix-name
+```
+Then returns to the terminal the complete security group name with hash date and its region.
+
 (NOT DEVELOPED YET) List the rules from some specific security group:
 
 ```

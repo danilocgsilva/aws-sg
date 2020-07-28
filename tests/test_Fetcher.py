@@ -1,5 +1,5 @@
 import unittest
-from src.Fetcher import Fetcher
+from awssg.Fetcher import Fetcher
 from tests.Client_Mock import Client_Mock
 
 class test_Fetcher(unittest.TestCase):

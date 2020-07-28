@@ -1,6 +1,6 @@
 import unittest
 from tests.Data_Mocks import Data_Mocks
-from src.Ip_Permission import Ip_Permission
+from awssg.Ip_Permission import Ip_Permission
 
 class test_Ip_Permission(unittest.TestCase):
 

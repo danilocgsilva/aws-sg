@@ -1,4 +1,4 @@
-from src.Client_Interface import Client_Interface
+from awssg.Client_Interface import Client_Interface
 import boto3
 
 class Client(Client_Interface):

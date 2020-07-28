@@ -1,6 +1,6 @@
 import json
-from src.RDS import RDS
-from src.Parser_Interface import Parser_Interface
+from awssg.RDS import RDS
+from awssg.Parser_Interface import Parser_Interface
 
 class RDS_Parser(Parser_Interface):
 

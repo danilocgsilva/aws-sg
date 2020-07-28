@@ -1,4 +1,4 @@
-from src.Client_Interface import Client_Interface
+from awssg.Client_Interface import Client_Interface
 from tests.Data_Mocks import Data_Mocks
 import json
 

@@ -1,5 +1,5 @@
-from src.Client_Config_Interface import Client_Config_Interface
-from src.Client_Interface import Client_Interface
+from awssg.Client_Config_Interface import Client_Config_Interface
+from awssg.Client_Interface import Client_Interface
 from tests.Client_Mock import Client_Mock
 
 class Client_Config_Mock(Client_Config_Interface):

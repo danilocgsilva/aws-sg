@@ -1,4 +1,4 @@
-from src.Client import Client
+from awssg.Client import Client
 
 class Fetcher:
 

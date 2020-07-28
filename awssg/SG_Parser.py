@@ -1,8 +1,8 @@
 import json
-from src.SG import SG
-from src.RDS_Parser import RDS_Parser
-from src.Parser_Interface import Parser_Interface
-from src.Client_Interface import Client_Interface
+from awssg.SG import SG
+from awssg.RDS_Parser import RDS_Parser
+from awssg.Parser_Interface import Parser_Interface
+from awssg.Client_Interface import Client_Interface
 
 class SG_Parser(Parser_Interface):
 

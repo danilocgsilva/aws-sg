@@ -1,5 +1,5 @@
 import json
-from src.Parser_Interface import Parser_Interface
+from awssg.Parser_Interface import Parser_Interface
 
 class Regions_Parser(Parser_Interface):
 

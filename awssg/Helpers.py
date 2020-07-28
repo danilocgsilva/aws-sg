@@ -1,12 +1,14 @@
-from src.Fetcher import Fetcher
-from src.SG_Parser import SG_Parser
-from src.Client import Client
-from src.Client_Config import Client_Config
-from src.Client_Config_Interface import Client_Config_Interface
-from src.Regions_Parser import Regions_Parser
-from src.RDS import RDS
-from src.RDS_Parser import RDS_Parser
+from awssg.Fetcher import Fetcher
+from awssg.SG_Parser import SG_Parser
+from awssg.Client import Client
+from awssg.Client_Config import Client_Config
+from awssg.Client_Config_Interface import Client_Config_Interface
+from awssg.Regions_Parser import Regions_Parser
+from awssg.RDS import RDS
+from awssg.RDS_Parser import RDS_Parser
 import argparse
+import boto3
+
 
 def readable_single_region_data(region: str, client_config: Client_Config_Interface) -> str:
 
@@ -23,7 +25,7 @@ def readable_single_region_data(region: str, client_config: Client_Config_Interf
 
     readable_string = ""
     for sg in security_group_list:
-        readable_string += "\n" + sg.get_name()
+        readable_string += " * " + sg.get_name() + "\n"
 
     return readable_string
 
@@ -49,17 +51,16 @@ def get_regions(client: Client) -> list:
 
 def readable_loop_regions_securities_groups(client_config: Client_Config) -> str:
     regions = get_regions(client_config.get_client())
-    readable_string = ""
     for region in regions:
-        readable_string += readable_single_region_data(region, client_config)
-    return readable_string
+        print("Region: " + region)
+        print(readable_single_region_data(region, client_config))
 
 
 def print_securities_groups(args, client_config):
-    if args.region is not None:
+    if args.region:
         print(readable_single_region_data(args.region, client_config))
     else:
-        print(readable_loop_regions_securities_groups(client_config))
+        readable_loop_regions_securities_groups(client_config)
 
 
 def print_securities_groups_from_rds_instance(rds_name):
@@ -76,3 +77,25 @@ def print_securities_groups_from_rds_instance(rds_name):
         for sg_name in rds.get_securities_groups_names():
             print("\t" + sg_name)
 
+
+def create_sg(group_name_description):
+    ec2 = boto3.client('ec2')
+    vpcs_response = ec2.describe_vpcs()
+    vpc_id = vpcs_response.get('Vpcs', [{}])[0].get('VpcId', '')
+    ec2.create_security_group(
+        GroupName=group_name_description, 
+        Description=group_name_description, 
+        VpcId=vpc_id
+    )
+    print("Security group " + group_name_description + " has been just created in " + ec2.meta.region_name + ".")
+
+
+def get_hash_date_from_date(datetime):
+    return str(datetime.year) + '{0:02}'.format(datetime.month) + '{0:02}'.format(datetime.day) + '-' + '{0:02}'.format(datetime.hour) + 'h' + '{0:02}'.format(datetime.minute) + 'm' + '{0:02}'.format(datetime.second) + 's' + str(datetime.microsecond)
+
+
+def list_sg(args, client_config):
+    if args.rds is not None:
+        print_securities_groups_from_rds_instance(args.rds)
+    else:
+        print_securities_groups(args, client_config)
