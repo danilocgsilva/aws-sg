@@ -1,8 +1,6 @@
-from src.Client_Config import Client_Config
-from src.Helpers import print_single_region_data, \
-    fast_add_arguments, \
+from awssg.Client_Config import Client_Config
+from awssg.Helpers import fast_add_arguments, \
     get_regions, \
-    print_loop_regions_securities_groups, \
     print_securities_groups, \
     print_securities_groups_from_rds_instance
 import argparse

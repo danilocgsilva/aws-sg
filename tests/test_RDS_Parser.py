@@ -1,6 +1,6 @@
 import unittest
-from src.RDS_Parser import RDS_Parser
-from src.RDS import RDS
+from awssg.RDS_Parser import RDS_Parser
+from awssg.RDS import RDS
 from tests.Data_Mocks import Data_Mocks
 from tests.Client_Mock import Client_Mock
 

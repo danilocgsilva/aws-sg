@@ -1,4 +1,4 @@
-from src.Ip_Permission import Ip_Permission
+from awssg.Ip_Permission import Ip_Permission
 import json
 
 class SG:

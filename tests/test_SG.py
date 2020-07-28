@@ -1,7 +1,7 @@
 import unittest
 import sys
 sys.path.insert(1, '..')
-from src.SG import SG
+from awssg.SG import SG
 from tests.Data_Mocks import Data_Mocks
 
 class test_SG(unittest.TestCase):
