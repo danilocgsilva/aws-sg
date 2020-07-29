@@ -19,9 +19,14 @@ class test_Helpers(unittest.TestCase):
 
 
     def test_readable_single_region_data(self):
+
         region = 'us-east-1'
 
-        expected_return = "\nmy-first-sg\nAny other place\ncrazy-hash-from-elastic-beanstalk"
+        expected_return = ""
+        expected_return += " * my-first-sg\n"
+        expected_return += " * Any other place\n"
+        expected_return += " * crazy-hash-from-elastic-beanstalk\n"
+        
         string_returned = readable_single_region_data(region, Client_Config_Mock())
 
         self.assertEqual(expected_return, string_returned)
