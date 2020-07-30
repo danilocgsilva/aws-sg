@@ -3,11 +3,12 @@ from awssg.Helpers import fast_add_arguments, \
     get_regions, \
     print_securities_groups, \
     print_securities_groups_from_rds_instance, \
-    create_sg, \
     list_sg, \
     get_hash_date_from_date
+from awssg.SG_Client import SG_Client
 import argparse
 import datetime
+import boto3
 
 
 def main():
@@ -33,7 +34,8 @@ def main():
 
     if args.create:
         group_name = args.create + get_hash_date_from_date(datetime.datetime.now())
-        create_sg(group_name_description=group_name)
+        ec2 = boto3.client('ec2')
+        SG_Client().set_client(ec2).set_group_name(group_name).create_sg()
     else:
         list_sg(args, client_config)
 
