@@ -9,19 +9,25 @@ class Client(Client_Interface):
     def describe_security_groups(self) -> dict:
         return self.ec2_client.describe_security_groups()
 
-
     def describe_regions(self) -> dict:
         return self.ec2_client.describe_regions()
-
 
     def describe_db_instances(self) -> dict:
         self.aws_client = boto3.client('rds')
         return self.aws_client.describe_db_instances()
 
-
     def describe_specific_security_group(self, security_group: str):
         return self.ec2_client.describe_security_groups(GroupNames=[security_group])
 
- 
     def describe_vpcs(self) -> dict:
         return self.ec2_client.describe_vpcs()
+
+    def create_security_group(self, group_name: str, vpc_id: str):
+        self.ec2_client.create_security_group(
+            GroupName=group_name,
+            Description=group_name,
+            VpcId=vpc_id
+        )
+
+    def get_region_name(self) -> str:
+        return self.ec2_client.meta.region_name
