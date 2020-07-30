@@ -6,18 +6,18 @@ from awssg.Helpers import fast_add_arguments, \
     list_sg, \
     get_hash_date_from_date
 from awssg.SG_Client import SG_Client
+from awssg.Client import Client
 import argparse
 import datetime
 import boto3
 
 
 def main():
-
     arguments_list = [
-        [ '--profile', '-p' ],
-        [ '--region', '-r' ],
-        [ '--rds', '-rds' ],
-        [ '--create', '-c' ]
+        ['--profile', '-p'],
+        ['--region', '-r'],
+        ['--rds', '-rds'],
+        ['--create', '-c']
     ]
 
     parser = argparse.ArgumentParser()
@@ -38,5 +38,3 @@ def main():
         SG_Client().set_client(ec2).set_group_name(group_name).create_sg()
     else:
         list_sg(args, client_config)
-
-    

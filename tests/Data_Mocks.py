@@ -870,3 +870,40 @@ class Data_Mocks:
     "ToPort": 22,
     "UserIdGroupPairs": []
 }'''
+
+
+    def get_json_vpcs_string(self) -> str:
+        return '''{
+  "Vpcs": [
+    {
+      "CidrBlock": "121.24.0.0/16",
+      "DhcpOptionsId": "dopt-1234abcd",
+      "State": "available",
+      "VpcId": "vpc-abcd1234",
+      "OwnerId": "10293806345",
+      "InstanceTenancy": "default",
+      "CidrBlockAssociationSet": [
+        {
+          "AssociationId": "vpc-cidr-assoc-1234abcd",
+          "CidrBlock": "121.24.0.0/16",
+          "CidrBlockState": {
+            "State": "associated"
+          }
+        }
+      ],
+      "IsDefault": true
+    }
+  ],
+  "ResponseMetadata": {
+    "RequestId": "abcd1234-abcd1234-abcd1234-abcd1234",
+    "HTTPStatusCode": 200,
+    "HTTPHeaders": {
+      "x-amzn-requestid": "abcd1234-abcd1234-abcd1234-abcd1234",
+      "content-type": "text/xml;charset=UTF-8",
+      "content-length": "959",
+      "date": "Thu, 30 Jul 1820 20:33:00 GMT",
+      "server": "AmazonEC2"
+    },
+    "RetryAttempts": 0
+  }
+}'''

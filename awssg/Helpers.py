@@ -78,23 +78,6 @@ def print_securities_groups_from_rds_instance(rds_name):
             print("\t" + sg_name)
 
 
-# def create_sg(group_name_description):
-#     ec2 = boto3.client('ec2')
-#     vpcs_response = ec2.describe_vpcs()
-#     vpcs_containers = vpcs_response.get('Vpcs', [{}])
-
-#     if len(vpcs_containers) != 1:
-#         raise Exception("You have no or more than a single virtual private cloud in this account, and now this program does not support such situation...")
-
-#     vpc_id = vpcs_containers[0].get('VpcId', '')
-#     ec2.create_security_group(
-#         GroupName=group_name_description, 
-#         Description=group_name_description, 
-#         VpcId=vpc_id
-#     )
-#     print("Security group " + group_name_description + " has been just created in " + ec2.meta.region_name + ".")
-
-
 def get_hash_date_from_date(datetime):
     return str(datetime.year) + '{0:02}'.format(datetime.month) + '{0:02}'.format(datetime.day) + '-' + '{0:02}'.format(datetime.hour) + 'h' + '{0:02}'.format(datetime.minute) + 'm' + '{0:02}'.format(datetime.second) + 's' + str(datetime.microsecond)
 

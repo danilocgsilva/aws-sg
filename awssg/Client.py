@@ -3,14 +3,15 @@ import boto3
 
 class Client(Client_Interface):
 
+    def __init__(self):
+         self.ec2_client = boto3.client('ec2')
+
     def describe_security_groups(self) -> dict:
-        self.aws_client = boto3.client('ec2')
-        return self.aws_client.describe_security_groups()
+        return self.ec2_client.describe_security_groups()
 
 
     def describe_regions(self) -> dict:
-        self.aws_client = boto3.client('ec2')
-        return self.aws_client.describe_regions()
+        return self.ec2_client.describe_regions()
 
 
     def describe_db_instances(self) -> dict:
@@ -19,5 +20,8 @@ class Client(Client_Interface):
 
 
     def describe_specific_security_group(self, security_group: str):
-        self.aws_client = boto3.client('ec2')
-        return self.aws_client.describe_security_groups(GroupNames=[security_group])
+        return self.ec2_client.describe_security_groups(GroupNames=[security_group])
+
+ 
+    def describe_vpcs(self) -> dict:
+        return self.ec2_client.describe_vpcs()

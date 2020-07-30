@@ -23,3 +23,8 @@ class Client_Mock(Client_Interface):
         data_string = Data_Mocks().get_json_string_filtered_sgs(security_group_name)
         data = json.loads(data_string)
         return data
+
+    def describe_vpcs(self) -> dict:
+        data_string = Data_Mocks().get_json_vpcs_string()
+        data = json.loads(data_string)
+        return data

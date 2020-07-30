@@ -17,3 +17,7 @@ class Client_Interface(abc.ABC):
     @abc.abstractmethod
     def describe_specific_security_group(self, security_group_name: str) -> dict:
         pass
+
+    @abc.abstractmethod
+    def describe_vpcs(self) -> dict:
+        pass

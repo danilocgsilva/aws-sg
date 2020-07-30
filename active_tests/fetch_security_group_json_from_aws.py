@@ -1,9 +1,9 @@
 import sys
 import argparse
 sys.path.insert(1, '..')
-from src.Client_Config import Client_Config
-from src.Fetcher import Fetcher
-from src.Helpers import fast_add_arguments
+from awssg.Client_Config import Client_Config
+from awssg.Fetcher import Fetcher
+from awssg.Helpers import fast_add_arguments
 
 client_config = Client_Config()
 
