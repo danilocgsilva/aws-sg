@@ -23,7 +23,7 @@ class Client(Client_Interface):
         return self.ec2_client.describe_vpcs()
 
     def create_security_group(self, group_name: str, vpc_id: str):
-        self.ec2_client.create_security_group(
+        return self.ec2_client.create_security_group(
             GroupName=group_name,
             Description=group_name,
             VpcId=vpc_id
@@ -35,4 +35,16 @@ class Client(Client_Interface):
     def delete_security_group(self, group_name: str):
         self.ec2_client.delete_security_group(
             GroupName=group_name
+        )
+
+    def set_rule(self, group_id: str, protocol: str, ip: str, port: str):
+
+        ec2 = boto3.resource('ec2')
+        security_group = ec2.SecurityGroup(group_id)
+
+        security_group.authorize_ingress(
+            IpProtocol=protocol,
+            CidrIp=ip + "/0",
+            FromPort=int(port),
+            ToPort=int(port)
         )

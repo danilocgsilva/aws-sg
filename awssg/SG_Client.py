@@ -29,14 +29,18 @@ class SG_Client:
         vpcs_response = Client().describe_vpcs()
         vpcs_containers = vpcs_response.get('Vpcs', [{}])
         self.validate_vpcs_count(vpcs_containers)
-        self. vpc_id = vpcs_containers[0].get('VpcId', '')
+        self.vpc_id = vpcs_containers[0].get('VpcId', '')
 
     def create_sg(self):
         self.prepare_before_aws()
-        self.client.create_security_group(self.group_name, self.vpc_id)
-        print("Security group " + self.group_name + " has been just created in " + self.client.get_region_name() + ".")
+        return self.client.create_security_group(self.group_name, self.vpc_id)
+        # print("Security group " + self.group_name + " has been just created in " + self.client.get_region_name() + ".")
 
     def delete_sg(self):
         self.prepare_before_aws()
         self.client.delete_security_group(self.group_name)
         print("Security group " + self.group_name + " has been deleted.")
+
+    def set_rule(self, group_id: str, protocol: str, ip: str, port: str):
+        self.prepare_before_aws()
+        self.client.set_rule(group_id, protocol, ip, port)

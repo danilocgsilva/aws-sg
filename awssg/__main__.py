@@ -18,7 +18,10 @@ def main():
         ['--region', '-r'],
         ['--rds', '-rds'],
         ['--create', '-c'],
-        ['--delete', '-d']
+        ['--delete', '-d'],
+        ['--protocol', '-pr'],
+        ['--ip', '-i'],
+        ['--port', '-po']
     ]
 
     parser = argparse.ArgumentParser()
@@ -36,7 +39,16 @@ def main():
     if args.create:
         group_name = args.create + get_hash_date_from_date(datetime.datetime.now())
         ec2 = Client()
-        SG_Client().set_client(ec2).set_group_name(group_name).create_sg()
+        sg_client = SG_Client()
+        result = sg_client.set_client(ec2).set_group_name(group_name).create_sg()
+
+        print("Security group named " + group_name + " has just been created.")
+
+        if args.protocol and args.ip and args.port:
+            sg_client.set_rule(result["GroupId"], args.protocol, args.ip, args.port)
+
+        
+
     elif args.delete:
         ec2 = Client()
         SG_Client().set_client(ec2).set_group_name(args.delete).delete_sg()
