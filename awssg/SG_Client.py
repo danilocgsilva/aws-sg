@@ -26,7 +26,7 @@ class SG_Client:
 
     def prepare_before_aws(self):
         self.validate_group_name()
-        vpcs_response = Client().describe_vpcs()
+        vpcs_response = self.client.describe_vpcs()
         vpcs_containers = vpcs_response.get('Vpcs', [{}])
         self.validate_vpcs_count(vpcs_containers)
         self.vpc_id = vpcs_containers[0].get('VpcId', '')
@@ -34,7 +34,6 @@ class SG_Client:
     def create_sg(self):
         self.prepare_before_aws()
         return self.client.create_security_group(self.group_name, self.vpc_id)
-        # print("Security group " + self.group_name + " has been just created in " + self.client.get_region_name() + ".")
 
     def delete_sg(self):
         self.prepare_before_aws()

@@ -7,6 +7,7 @@ from awssg.Helpers import fast_add_arguments, \
     get_hash_date_from_date
 from awssg.SG_Client import SG_Client
 from awssg.Client import Client
+from awssg.SG import SG
 import argparse
 import datetime
 import boto3
@@ -21,7 +22,8 @@ def main():
         ['--delete', '-d'],
         ['--protocol', '-pr'],
         ['--ip', '-i'],
-        ['--port', '-po']
+        ['--port', '-po'],
+        ['--rules-from', '-rf']
     ]
 
     parser = argparse.ArgumentParser()
@@ -47,10 +49,15 @@ def main():
         if args.protocol and args.ip and args.port:
             sg_client.set_rule(result["GroupId"], args.protocol, args.ip, args.port)
 
-        
-
     elif args.delete:
         ec2 = Client()
         SG_Client().set_client(ec2).set_group_name(args.delete).delete_sg()
+    elif args.rules_from:
+        sg = SG()
+        sg.set_string_data()
+        rules = sg.get_rules()
+        print("The security group named " + sg.get_name() + " have the following rules: ")
+        for rule in sg.get_rules():
+            print("Protocol: " + rule.get_protocol() + ", ip: " + rule.get_ip() + ", port: " + rule.get_port())
     else:
         list_sg(args, client_config)

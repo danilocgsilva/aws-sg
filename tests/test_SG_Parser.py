@@ -16,16 +16,13 @@ class test_SG(unittest.TestCase):
         sg_data = client.describe_security_groups()
         self.sg_parser.set_data(sg_data)
 
-
     def test_correct_count_sg(self):
         security_groups_returned = self.sg_parser.get_list()
         self.assertEqual(3, len(security_groups_returned))
 
-
     def test_return_list(self):
         security_groups_returned = self.sg_parser.get_list()
         self.assertTrue(isinstance(security_groups_returned, list))
-
 
     def test_is_rds_instance_name_exists_true(self):
         client = Client_Mock()
@@ -40,7 +37,6 @@ class test_SG(unittest.TestCase):
 
         self.assertTrue(exists)
 
-
     def test_is_rds_instance_name_exists_false(self):
         client = Client_Mock()
         rds_data = client.describe_db_instances()
@@ -53,4 +49,3 @@ class test_SG(unittest.TestCase):
         exists = self.sg_parser.is_rds_instance_name_exists(rds_name, client)
 
         self.assertFalse(exists)
-
