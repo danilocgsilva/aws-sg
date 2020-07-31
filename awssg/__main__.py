@@ -17,7 +17,8 @@ def main():
         ['--profile', '-p'],
         ['--region', '-r'],
         ['--rds', '-rds'],
-        ['--create', '-c']
+        ['--create', '-c'],
+        ['--delete', '-d']
     ]
 
     parser = argparse.ArgumentParser()
@@ -34,8 +35,10 @@ def main():
 
     if args.create:
         group_name = args.create + get_hash_date_from_date(datetime.datetime.now())
-        # ec2 = boto3.client('ec2')
         ec2 = Client()
         SG_Client().set_client(ec2).set_group_name(group_name).create_sg()
+    elif args.delete:
+        ec2 = Client()
+        SG_Client().set_client(ec2).set_group_name(args.delete).delete_sg()
     else:
         list_sg(args, client_config)

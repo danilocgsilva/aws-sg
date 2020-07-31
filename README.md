@@ -52,6 +52,11 @@ awssg --create my-suffix-name
 ```
 Then returns to the terminal the complete security group name with hash date and its region.
 
+Want to delete some security group?
+```
+awssg --delete security_group_name
+```
+
 (NOT DEVELOPED YET) List the rules from some specific security group:
 
 ```

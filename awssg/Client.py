@@ -31,3 +31,8 @@ class Client(Client_Interface):
 
     def get_region_name(self) -> str:
         return self.ec2_client.meta.region_name
+
+    def delete_security_group(self, group_name: str):
+        self.ec2_client.delete_security_group(
+            GroupName=group_name
+        )
