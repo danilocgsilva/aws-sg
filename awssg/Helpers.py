@@ -11,13 +11,9 @@ import boto3
 
 
 def readable_single_region_data(region: str, client_config: Client_Config_Interface) -> str:
-
     client_config.set_region(region)
-
     client = client_config.get_client()
-
     fetcher = Fetcher().set_client(client)
-
     sg_parser = SG_Parser()
     sgs_data = fetcher.get_sgs_data()
     sg_parser.set_data(sgs_data)

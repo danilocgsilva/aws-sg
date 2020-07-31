@@ -794,66 +794,73 @@ class Data_Mocks:
     }
 }'''
 
-    def get_json_string_filtered_sgs(self, security_group_name: str) -> str:
+    def get_json_string_sgs(self) -> str:
+        return '''{
+            "SecurityGroups": [
+                {
+                    "Description": "Allows access to http protocol",
+                    "GroupName": "allow-http",
+                    "IpPermissions": [
+                        {
+                            "FromPort": 80,
+                            "IpProtocol": "tcp",
+                            "IpRanges": [
+                                {
+                                    "CidrIp": "0.0.0.0/0"
+                                }
+                            ],
+                            "Ipv6Ranges": [],
+                            "PrefixListIds": [],
+                            "ToPort": 80,
+                            "UserIdGroupPairs": []
+                        }
+                    ],
+                    "OwnerId": "2039845702934",
+                    "GroupId": "sg-092498379087908",
+                    "IpPermissionsEgress": [
+                        {
+                            "IpProtocol": "-1",
+                            "IpRanges": [
+                                {
+                                    "CidrIp": "0.0.0.0/0"
+                                }
+                            ],
+                            "Ipv6Ranges": [],
+                            "PrefixListIds": [],
+                            "UserIdGroupPairs": []
+                        }
+                    ],
+                    "Tags": [
+                        {
+                            "Key": "Name",
+                            "Value": "Allow http"
+                        }
+                    ],
+                    "VpcId": "vpc-857654764"
+                }
+            ],
+            "ResponseMetadata": {
+                "RequestId": "35463456-3456-7456-23452-2452234",
+                "HTTPStatusCode": 200,
+                "HTTPHeaders": {
+                    "x-amzn-requestid": "35463456-3456-7456-23452-2452234",
+                    "content-type": "text/xml;charset=UTF-8",
+                    "content-length": "1697",
+                    "date": "Sat, 06 Jun 2020 18:58:04 GMT",
+                    "server": "AmazonEC2"
+                },
+                "RetryAttempts": 0
+            }
+        }'''
 
+    def get_json_string_filtered_sgs(self, security_group_name: str) -> str:
         if security_group_name == "allow-http":
-            return '''{
-    "SecurityGroups": [
-        {
-            "Description": "Allows access to http protocol",
-            "GroupName": "allow-http",
-            "IpPermissions": [
-                {
-                    "FromPort": 80,
-                    "IpProtocol": "tcp",
-                    "IpRanges": [
-                        {
-                            "CidrIp": "0.0.0.0/0"
-                        }
-                    ],
-                    "Ipv6Ranges": [],
-                    "PrefixListIds": [],
-                    "ToPort": 80,
-                    "UserIdGroupPairs": []
-                }
-            ],
-            "OwnerId": "2039845702934",
-            "GroupId": "sg-092498379087908",
-            "IpPermissionsEgress": [
-                {
-                    "IpProtocol": "-1",
-                    "IpRanges": [
-                        {
-                            "CidrIp": "0.0.0.0/0"
-                        }
-                    ],
-                    "Ipv6Ranges": [],
-                    "PrefixListIds": [],
-                    "UserIdGroupPairs": []
-                }
-            ],
-            "Tags": [
-                {
-                    "Key": "Name",
-                    "Value": "Allow http"
-                }
-            ],
-            "VpcId": "vpc-857654764"
-        }
-    ],
-    "ResponseMetadata": {
-        "RequestId": "35463456-3456-7456-23452-2452234",
-        "HTTPStatusCode": 200,
-        "HTTPHeaders": {
-            "x-amzn-requestid": "35463456-3456-7456-23452-2452234",
-            "content-type": "text/xml;charset=UTF-8",
-            "content-length": "1697",
-            "date": "Sat, 06 Jun 2020 18:58:04 GMT",
-            "server": "AmazonEC2"
-        },
-        "RetryAttempts": 0
-    }
-}'''
+            return self.get_json_string_sgs()
+        raise Exception()
+
+    def get_json_string_filtered_sgs_by_id(self, security_group_id: str) -> str:
+        if security_group_id == "sg-092498379087908":
+            return self.get_json_string_sgs()
         raise Exception()
 
     def get_string_single_ip_permission(self) -> str:
@@ -870,7 +877,6 @@ class Data_Mocks:
     "ToPort": 22,
     "UserIdGroupPairs": []
 }'''
-
 
     def get_json_vpcs_string(self) -> str:
         return '''{

@@ -1,16 +1,13 @@
 from awssg.Client_Config import Client_Config
 from awssg.Helpers import fast_add_arguments, \
-    get_regions, \
-    print_securities_groups, \
-    print_securities_groups_from_rds_instance, \
     list_sg, \
     get_hash_date_from_date
 from awssg.SG_Client import SG_Client
 from awssg.Client import Client
-from awssg.SG import SG
+from awssg.Fetcher import Fetcher
+from awssg.SG_Parser import SG_Parser
 import argparse
 import datetime
-import boto3
 
 
 def main():
@@ -53,11 +50,18 @@ def main():
         ec2 = Client()
         SG_Client().set_client(ec2).set_group_name(args.delete).delete_sg()
     elif args.rules_from:
-        sg = SG()
-        sg.set_string_data()
-        rules = sg.get_rules()
-        print("The security group named " + sg.get_name() + " have the following rules: ")
-        for rule in sg.get_rules():
-            print("Protocol: " + rule.get_protocol() + ", ip: " + rule.get_ip() + ", port: " + rule.get_port())
+        #ec2 = Client()
+        #sg = SG()
+        #sg.set_string_data()
+        #rules = sg.get_rules()
+        #print("The security group named " + sg.get_name() + " have the following rules: ")
+        #for rule in sg.get_rules():
+        #    print("Protocol: " + rule.get_protocol() + ", ip: " + rule.get_ip() + ", port: " + rule.get_port())
+
+        client = client_config.get_client()
+        fetcher = Fetcher().set_client(client)
+        sg_parser = SG_Parser()
+        sgs_data = fetcher.get_sgs_data_by_id(args.rules_from)
+        sg_parser.set_data(sgs_data)
     else:
         list_sg(args, client_config)
