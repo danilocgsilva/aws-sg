@@ -28,13 +28,14 @@ class SG_Parser(Parser_Interface):
 
     def make_list(self):
 
+        self.list = []
+
         for chunk in self.data["SecurityGroups"]:
 
             sg = SG()
             sg.set_data(chunk)
 
             self.list.append(sg)
-
 
     def is_rds_instance_name_exists(self, rds_instance_name, client: Client_Interface) -> bool:
 
@@ -49,3 +50,12 @@ class SG_Parser(Parser_Interface):
                 return True
 
         return False
+
+    def get_sg(self):
+
+        if len(self.list) > 1:
+            exception_message = 'This class received a data from several security groups. This method '
+            exception_message += 'can return a security group only if the data have a single security group.'
+            raise Exception(exception_message)
+
+        return self.list[0]

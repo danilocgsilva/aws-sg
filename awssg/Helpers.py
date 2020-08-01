@@ -4,10 +4,9 @@ from awssg.Client import Client
 from awssg.Client_Config import Client_Config
 from awssg.Client_Config_Interface import Client_Config_Interface
 from awssg.Regions_Parser import Regions_Parser
-from awssg.RDS import RDS
+from awssg.SG_Client import SG_Client
 from awssg.RDS_Parser import RDS_Parser
-import argparse
-import boto3
+import datetime
 
 
 def readable_single_region_data(region: str, client_config: Client_Config_Interface) -> str:
@@ -21,7 +20,7 @@ def readable_single_region_data(region: str, client_config: Client_Config_Interf
 
     readable_string = ""
     for sg in security_group_list:
-        readable_string += " * " + sg.get_name() + "\n"
+        readable_string += " * " + sg.get_name() + ", id: " + sg.get_id() + "\n"
 
     return readable_string
 
@@ -74,8 +73,8 @@ def print_securities_groups_from_rds_instance(rds_name):
             print("\t" + sg_name)
 
 
-def get_hash_date_from_date(datetime):
-    return str(datetime.year) + '{0:02}'.format(datetime.month) + '{0:02}'.format(datetime.day) + '-' + '{0:02}'.format(datetime.hour) + 'h' + '{0:02}'.format(datetime.minute) + 'm' + '{0:02}'.format(datetime.second) + 's' + str(datetime.microsecond)
+def get_hash_date_from_date(datetime_data):
+    return str(datetime_data.year) + '{0:02}'.format(datetime_data.month) + '{0:02}'.format(datetime_data.day) + '-' + '{0:02}'.format(datetime_data.hour) + 'h' + '{0:02}'.format(datetime_data.minute) + 'm' + '{0:02}'.format(datetime_data.second) + 's' + str(datetime_data.microsecond)
 
 
 def list_sg(args, client_config):
@@ -83,3 +82,13 @@ def list_sg(args, client_config):
         print_securities_groups_from_rds_instance(args.rds)
     else:
         print_securities_groups(args, client_config)
+
+
+def create_sg(args):
+    group_name = args.create + get_hash_date_from_date(datetime.datetime.now())
+    ec2 = Client()
+    sg_client = SG_Client()
+    result = sg_client.set_client(ec2).set_group_name(group_name).create_sg()
+    print("Security group named " + group_name + " has just been created.")
+    if args.protocol and args.ip and args.port:
+        sg_client.set_rule(result["GroupId"], args.protocol, args.ip, args.port)
