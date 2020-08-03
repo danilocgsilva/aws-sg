@@ -92,3 +92,17 @@ def create_sg(args):
     print("Security group named " + group_name + " has just been created.")
     if args.protocol and args.ip and args.port:
         sg_client.set_rule(result["GroupId"], args.protocol, args.ip, args.port)
+
+
+def get_rules_from(client_config, args):
+    client = client_config.get_client()
+    fetcher = Fetcher().set_client(client)
+    sg_parser = SG_Parser()
+    sgs_data = fetcher.get_sgs_data_by_id(args.rules_from)
+    sg_parser.set_data(sgs_data)
+    sg = sg_parser.get_sg()
+    print("Your security group have following rules:")
+    for rule in sg.get_rules():
+        print(
+            " * Protocol: " + rule.get_protocol() + ", ip: " + str(rule.get_ip()) + ", port: " + str(rule.get_port())
+        )

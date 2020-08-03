@@ -19,3 +19,10 @@ class test_SG_Client(unittest.TestCase):
         self.sg_client.set_client(client).set_group_name("stub_name")
         with self.assertRaises(Exception):
             self.sg_client.create_sg()
+
+    def test_exception_create_sg_missing_ip(self):
+        protocol = 'tcp'
+        port = '1234'
+        sg_id = 'sg-123abcd'
+        with self.assertRaises(Exception):
+            self.sg_client.set_rule(sg_id, protocol, None, port)

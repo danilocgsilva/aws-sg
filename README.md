@@ -19,46 +19,11 @@ Installing:
 pip install .
 ```
 
-Executing command:
+## Usages
 
-```
-awssg
-```
+* [Listing securities groups](docs/List_Groups.md)
+* [Creating a new security group](docs/Create_Security_Group.md)
+* [Delete a security groups](docs/Delete_Security_Group.md)
+* [Check rules from security group](docs/Check_rules_from_security_group.md)
+* [Create a scurity group with rules](docs/Create_Security_Group_With_Rules.md)
 
-By default, will lists all securities groups for each region.
-
-You may want lists the security group from a single region. Then, type:
-
-```
-awssg --region <your_region>
-```
-
-Some environments may have several profiles configured. Or is required to get a profile name. In this case, you will need to provides the profile name:
-
-```
-awssg --profile <your_profile>
-```
-
-You may want to know a list of securities groups from a specific rds. Type:
-
-```
-awssg --rds <your_rds>
-```
-
-Create a brand new security group.
-
-```
-awssg --create my-suffix-name
-```
-Then returns to the terminal the complete security group name with hash date and its region.
-
-Want to delete some security group?
-```
-awssg --delete security_group_name
-```
-
-List the rules from some specific security group:
-
-```
-awssg --rules-from <security_group_id>
-```
