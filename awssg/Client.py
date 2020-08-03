@@ -44,7 +44,7 @@ class Client(Client_Interface):
 
         security_group.authorize_ingress(
             IpProtocol=protocol,
-            CidrIp=ip + "/0",
+            CidrIp=ip + "/32",
             FromPort=int(port),
             ToPort=int(port)
         )
