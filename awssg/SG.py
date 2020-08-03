@@ -26,3 +26,7 @@ class SG:
             permissions.append(Ip_Permission().set_data(permission_data))
 
         return permissions
+
+    def get_rules_count(self) -> int:
+        rules = self.get_rules()
+        return len(rules)

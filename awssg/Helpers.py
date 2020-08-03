@@ -20,7 +20,7 @@ def readable_single_region_data(region: str, client_config: Client_Config_Interf
 
     readable_string = ""
     for sg in security_group_list:
-        readable_string += " * " + sg.get_name() + ", id: " + sg.get_id() + "\n"
+        readable_string += " * " + sg.get_name() + ", id: " + sg.get_id() + ", rules count: " + str(sg.get_rules_count()) + "\n"
 
     return readable_string
 
