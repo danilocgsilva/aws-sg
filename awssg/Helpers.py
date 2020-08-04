@@ -11,6 +11,10 @@ import datetime
 
 
 def readable_single_region_data(region: str, client_config: Client_Config_Interface, fields = None) -> str:
+    printer = Printer()
+    printer.validate_fields(fields)
+    if not printer.is_fields_valids():
+        raise Exception(printer.get_invalid_fields_message())
     client_config.set_region(region)
     client = client_config.get_client()
     fetcher = Fetcher().set_client(client)
@@ -21,7 +25,7 @@ def readable_single_region_data(region: str, client_config: Client_Config_Interf
 
     readable_string = ""
     for sg in security_group_list:
-        readable_string += Printer().set_sg(sg).set_fields(fields).get_string() + "\n"
+        readable_string += printer.set_sg(sg).set_fields(fields).get_string() + "\n"
 
     return readable_string
 

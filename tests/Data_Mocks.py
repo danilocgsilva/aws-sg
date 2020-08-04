@@ -238,7 +238,7 @@ class Data_Mocks:
             "MasterUsername": "master_name",
             "DBName": "main_database",
             "Endpoint": {
-                "Address": "main_database.akhsdgkagf.us-east-1.rds.amazonaws.com",
+                "Address": "main_database.luisdkjsghf.mo-east-2.rds.amazonaws.com",
                 "Port": 3306,
                 "HostedZoneId": "asldjfhakslalkj"
             },

@@ -43,3 +43,18 @@ class test_Printer(unittest.TestCase):
         self.printer.set_sg(self.sg).set_fields("name,rulescount")
         returned_string = self.printer.get_string()
         self.assertEqual(returned_string, sgidreturn)
+
+    def test_validate_fields(self):
+        string_fields = "name,rulescount"
+        self.printer.validate_fields(string_fields)
+        self.assertTrue(self.printer.is_fields_valids())
+
+    def test_not_valid_fields(self):
+        string_fields = "name,someinvalid"
+        self.printer.validate_fields(string_fields)
+        self.assertFalse(self.printer.is_fields_valids())
+
+    def test_single_valid_fields(self):
+        string_fields = "someinvalid"
+        self.printer.validate_fields(string_fields)
+        self.assertFalse(self.printer.is_fields_valids())
