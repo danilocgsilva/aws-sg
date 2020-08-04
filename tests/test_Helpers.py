@@ -10,22 +10,20 @@ class test_Helpers(unittest.TestCase):
         regions = get_regions(client)
         self.assertTrue(isinstance(regions, list))
 
-
     def test_correct_data_fetched_for_regions_list(self):
         client = Client_Mock()
         regions = get_regions(client)
         expected_list = ["sa-north-1", "ju-south-1", "mo-west-3"]
         self.assertListEqual(expected_list, regions)
 
-
     def test_readable_single_region_data(self):
 
         region = 'us-east-1'
 
         expected_return = ""
-        expected_return += " * my-first-sg, id: sg-2f31fa12094\n"
-        expected_return += " * Any other place, id: sg-423fa34f43def\n"
-        expected_return += " * crazy-hash-from-elastic-beanstalk, id: sg-96f7d999a98f\n"
+        expected_return += "sg-2f31fa12094\n"
+        expected_return += "sg-423fa34f43def\n"
+        expected_return += "sg-96f7d999a98f\n"
         
         string_returned = readable_single_region_data(region, Client_Config_Mock())
 
