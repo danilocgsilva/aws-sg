@@ -26,4 +26,11 @@ You may want to know a list of securities groups from a specific rds. Type:
 ```
 awssg --rds <your_rds>
 ```
-git a
+
+Want to get more information than just the id? So you have the option to prints together the name and the rules count.
+```
+awssg --fields name
+awssg --fields rulescount
+awssg --fields name,rulescount
+```
+Any of these formats works.

@@ -6,10 +6,11 @@ from awssg.Client_Config_Interface import Client_Config_Interface
 from awssg.Regions_Parser import Regions_Parser
 from awssg.SG_Client import SG_Client
 from awssg.RDS_Parser import RDS_Parser
+from awssg.Printer import Printer
 import datetime
 
 
-def readable_single_region_data(region: str, client_config: Client_Config_Interface) -> str:
+def readable_single_region_data(region: str, client_config: Client_Config_Interface, fields = None) -> str:
     client_config.set_region(region)
     client = client_config.get_client()
     fetcher = Fetcher().set_client(client)
@@ -20,7 +21,7 @@ def readable_single_region_data(region: str, client_config: Client_Config_Interf
 
     readable_string = ""
     for sg in security_group_list:
-        readable_string += " * " + sg.get_name() + ", id: " + sg.get_id() + ", rules count: " + str(sg.get_rules_count()) + "\n"
+        readable_string += Printer().set_sg(sg).set_fields(fields).get_string() + "\n"
 
     return readable_string
 
@@ -44,7 +45,7 @@ def get_regions(client: Client) -> list:
     return regions_parser.get_list()
 
 
-def readable_loop_regions_securities_groups(client_config: Client_Config) -> str:
+def readable_loop_regions_securities_groups(client_config: Client_Config, fields: str) -> str:
     regions = get_regions(client_config.get_client())
     for region in regions:
         print("Region: " + region)
@@ -53,9 +54,9 @@ def readable_loop_regions_securities_groups(client_config: Client_Config) -> str
 
 def print_securities_groups(args, client_config):
     if args.region:
-        print(readable_single_region_data(args.region, client_config))
+        print(readable_single_region_data(args.region, client_config, args.fields))
     else:
-        readable_loop_regions_securities_groups(client_config)
+        readable_loop_regions_securities_groups(client_config, args.fields)
 
 
 def print_securities_groups_from_rds_instance(rds_name):

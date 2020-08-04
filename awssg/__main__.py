@@ -20,7 +20,8 @@ def main():
         ['--protocol', '-pr'],
         ['--ip', '-i'],
         ['--port', '-po'],
-        ['--rules-from', '-rf']
+        ['--rules-from', '-rf'],
+        ['--fields', '-f']
     ]
 
     parser = argparse.ArgumentParser()
