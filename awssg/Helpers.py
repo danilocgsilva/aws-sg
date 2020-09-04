@@ -96,7 +96,13 @@ def create_sg(args):
     result = sg_client.set_client(ec2).set_group_name(group_name).create_sg()
     print("Security group named " + group_name + " has just been created.")
     if args.protocol and args.ip and args.port:
-        sg_client.set_rule(result["GroupId"], args.protocol, args.ip, args.port)
+
+        if args.ip == "mine":
+            ip_to_set = get_ip_to_set()
+        else:
+            ip_to_set = args.ip
+
+        sg_client.set_rule(result["GroupId"], args.protocol, ip_to_set, args.port)
 
 
 def get_rules_from(client_config, args):
