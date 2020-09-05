@@ -105,7 +105,6 @@ def create_sg(args):
 
         sg_client.set_rule(result["GroupId"], args.protocol, ip_to_set, args.port)
 
-
 def get_rules_from(client_config, args):
     client = client_config.get_client()
     fetcher = Fetcher().set_client(client)
