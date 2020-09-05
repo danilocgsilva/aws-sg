@@ -7,6 +7,7 @@ from awssg.Regions_Parser import Regions_Parser
 from awssg.SG_Client import SG_Client
 from awssg.RDS_Parser import RDS_Parser
 from awssg.Printer import Printer
+from wimiapi.Wimi import Wimi
 import datetime
 
 
@@ -98,7 +99,7 @@ def create_sg(args):
     if args.protocol and args.ip and args.port:
 
         if args.ip == "mine":
-            ip_to_set = get_ip_to_set()
+            ip_to_set = Wimi().get_ip('ipv4')
         else:
             ip_to_set = args.ip
 
