@@ -7,6 +7,7 @@ class SG_Client:
         self.client = None
         self.group_name = None
         self.vpc_id = None
+        self.groupIp = None
 
     def set_group_name(self, group_name):
         self.group_name = group_name
@@ -33,7 +34,9 @@ class SG_Client:
 
     def create_sg(self):
         self.prepare_before_aws()
-        return self.client.create_security_group(self.group_name, self.vpc_id)
+        result_creation = self.client.create_security_group(self.group_name, self.vpc_id)
+        self.groupId = result_creation["GroupId"]
+        return result_creation
 
     def delete_sg(self):
         self.prepare_before_aws()
@@ -43,3 +46,6 @@ class SG_Client:
     def set_rule(self, group_id: str, protocol: str, ip: str, port: str):
         self.prepare_before_aws()
         self.client.set_rule(group_id, protocol, ip, port)
+
+    def getGroupId(self) -> str:
+        return self.groupId
