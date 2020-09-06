@@ -32,9 +32,14 @@ class Client(Client_Interface):
     def get_region_name(self) -> str:
         return self.ec2_client.meta.region_name
 
-    def delete_security_group(self, group_name: str):
+    def delete_security_group_by_name(self, group_name: str):
         self.ec2_client.delete_security_group(
             GroupName=group_name
+        )
+    
+    def delete_security_group_by_id(self, group_id: str):
+        self.ec2_client.delete_security_group(
+            GroupId=group_id
         )
 
     def set_rule(self, group_id: str, protocol: str, ip: str, port: str):

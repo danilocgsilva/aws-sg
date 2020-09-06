@@ -17,6 +17,7 @@ def main():
         ['--rds', '-rds'],
         ['--create', '-c'],
         ['--delete', '-d'],
+        ['--delete-name', '-dn'],
         ['--protocol', '-pr'],
         ['--ip', '-i'],
         ['--port', '-po'],
@@ -38,7 +39,10 @@ def main():
         create_sg(args)
     elif args.delete:
         ec2 = Client()
-        SG_Client().set_client(ec2).set_group_name(args.delete).delete_sg()
+        SG_Client().set_client(ec2).set_group_id(args.delete).delete_sg()
+    elif args.delete_name:
+        ec2 = Client()
+        SG_Client().set_client(ec2).set_group_name(args.delete_name).delete_sg()
     elif args.rules_from:
         get_rules_from(client_config, args)
     else:

@@ -26,3 +26,10 @@ class test_SG_Client(unittest.TestCase):
         sg_id = 'sg-123abcd'
         with self.assertRaises(Exception):
             self.sg_client.set_rule(sg_id, protocol, None, port)
+
+    def test_set_group_name(self):
+        test_name = 'my-sg-name'
+        self.sg_client.set_group_name(test_name)
+        self.assertEqual(test_name, self.sg_client.getGroupName())
+
+
