@@ -39,7 +39,10 @@ def main():
         create_sg(args)
     elif args.delete:
         ec2 = Client()
-        SG_Client().set_client(ec2).set_group_id(args.delete).delete_sg()
+        sgclient = SG_Client()
+        sgs_to_delete = args.delete.split(",")
+        for sg_to_delete in sgs_to_delete:
+            sgclient.set_client(ec2).set_group_id(sg_to_delete).delete_sg()
     elif args.delete_name:
         ec2 = Client()
         SG_Client().set_client(ec2).set_group_name(args.delete_name).delete_sg()
