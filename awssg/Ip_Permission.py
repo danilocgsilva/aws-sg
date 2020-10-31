@@ -11,10 +11,20 @@ class Ip_Permission:
         return self
 
     def get_protocol(self) -> str:
-        return self.data["IpProtocol"]
+        protocol = self.data["IpProtocol"]
+        if protocol == "-1":
+            return "anything"
+        else:
+            return protocol
 
-    def get_port(self) -> int:
-        return self.data["FromPort"]
+    def get_port(self):
+        if "FromPort" in self.data:
+            return str(self.data["FromPort"])
+        else:
+            return ""
 
     def get_ip(self):
-        return self.data["IpRanges"][0]["CidrIp"]
+        if len(self.data["IpRanges"]) == 0:
+            return "all"
+        else:
+            return self.data["IpRanges"][0]["CidrIp"]

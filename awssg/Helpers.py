@@ -114,6 +114,11 @@ def get_rules_from(client_config, args):
     sg = sg_parser.get_sg()
     print("Your security group have following rules:")
     for rule in sg.get_rules():
+
+        rulesProtocol = rule.get_protocol()
+        rulesPort = rule.get_port()
+        rulesIp = str(rule.get_ip())
+
         print(
-            " * Protocol: " + rule.get_protocol() + ", ip: " + str(rule.get_ip()) + ", port: " + str(rule.get_port())
+            " * Protocol: " + rulesProtocol + ", ip: " + rulesIp + ", port: " + rulesPort
         )
