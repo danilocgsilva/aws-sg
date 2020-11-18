@@ -58,7 +58,7 @@ class Client(Client_Interface):
         return self.ec2_client.describe_security_groups(GroupIds=[sg_id])
 
     def check_exists_by_name(self, sg_id):
-        raise Exception("still beign implemented")
+        raise Exception("still beign implemented") # TODO implements
 
     def check_exists_by_id(self, sg_id):
-        raise Exception("still beign implemented")
+        raise Exception("still beign implemented") # TODO implements
