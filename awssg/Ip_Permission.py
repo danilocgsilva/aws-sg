@@ -19,7 +19,7 @@ class Ip_Permission:
 
     def get_port(self):
         if "FromPort" in self.data:
-            return str(self.data["FromPort"])
+            return int(self.data["FromPort"])
         else:
             return ""
 
