@@ -1,5 +1,5 @@
 from awssg.Client import Client
-
+import botocore
 
 class SG_Client:
 
@@ -54,21 +54,25 @@ class SG_Client:
 
     
     def try_delete_by_id_or_warn(self, group_id):
-        sg_exists = self.client.check_exists_by_id(group_id)
-        if sg_exists:
+        try:
             self.client.delete_security_group_by_id(self.groupId)
             print("Security group with id " + group_id + " has been deleted.")
-        else:
-            print("The security group with id " + group_id + " does not exists.")
+        except botocore.exceptions.ClientError as e:
+            if e.response["Error"]["Code"] == "InvalidGroup.NotFound":
+                print("The security group with id " + group_id + " does not exists.")
+            else:
+                raise e
 
     
     def try_delete_by_name_or_warn(self, gruoup_name):
-        sg_exists = self.client.check_exists_by_name(gruoup_name)
-        if sg_exists:
+        try:
             self.client.delete_security_group_by_name(gruoup_name)
             print("Security group with name " + gruoup_name + " has been deleted.")
-        else:
-            print("The security group with name " + gruoup_name + " does not exists.")
+        except botocore.exceptions.ClientError as e:
+            if e.response["Error"]["Code"] == "InvalidGroup.NotFound":
+                print("Security group with name " + gruoup_name + " has been deleted.")
+            else:
+                raise e
 
 
     def set_rule(self, group_id: str, protocol: str, ip: str, port: str):
