@@ -46,15 +46,30 @@ class SG_Client:
         self.prepare_before_aws()
 
         if self.group_name:
-            self.client.delete_security_group_by_name(self.group_name)
-            data_to_inform = self.group_name
+            self.try_delete_by_name_or_warn(self.group_name)
         elif self.groupId:
-            self.client.delete_security_group_by_id(self.groupId)
-            data_to_inform = self.groupId
+            self.try_delete_by_id_or_warn(self.groupId)
         else:
             raise Exception('Tries to delete a group without information about name or id.')
 
-        print("Security group " + data_to_inform + " has been deleted.")
+    
+    def try_delete_by_id_or_warn(self, group_id):
+        sg_exists = self.client.check_exists_by_id(group_id)
+        if sg_exists:
+            self.client.delete_security_group_by_id(self.groupId)
+            print("Security group with id " + group_id + " has been deleted.")
+        else:
+            print("The security group with id " + group_id + " does not exists.")
+
+    
+    def try_delete_by_name_or_warn(self, gruoup_name):
+        sg_exists = self.client.check_exists_by_name(gruoup_name)
+        if sg_exists:
+            self.client.delete_security_group_by_name(gruoup_name)
+            print("Security group with name " + gruoup_name + " has been deleted.")
+        else:
+            print("The security group with name " + gruoup_name + " does not exists.")
+
 
     def set_rule(self, group_id: str, protocol: str, ip: str, port: str):
         self.prepare_before_aws()
