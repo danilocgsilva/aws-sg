@@ -70,7 +70,7 @@ class SG_Client:
             print("Security group with name " + gruoup_name + " has been deleted.")
         except botocore.exceptions.ClientError as e:
             if e.response["Error"]["Code"] == "InvalidGroup.NotFound":
-                print("Security group with name " + gruoup_name + " has been deleted.")
+                print("Security group with name " + gruoup_name + " does not exosts.")
             else:
                 raise e
 
