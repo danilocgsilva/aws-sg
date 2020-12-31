@@ -42,5 +42,7 @@ class Client_Mock(Client_Interface):
         data = json.loads(data_string)
         return data
 
-    def create_security_group(self, group_name, vpc_id):
-        pass
+    def create_security_group(self, group_name: str, vpc_id):
+        data_string = Data_Mocks().get_string_response_after_security_group_creation()
+        data = json.loads(data_string)
+        return data

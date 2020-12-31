@@ -976,7 +976,7 @@ class Data_Mocks:
     }
 }'''
 
-    def get_string_response_after_security_group_creation():
+    def get_string_response_after_security_group_creation(self) -> str:
         return '''{
     "GroupId": "sg-c8ccc93558277d449",
     "ResponseMetadata": {
