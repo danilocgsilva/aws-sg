@@ -4,7 +4,6 @@ sys.path.insert(1, "..")
 from awssg.SG_Client import SG_Client
 from tests.Client_Mock import Client_Mock
 
-
 class test_SG_Client(unittest.TestCase):
 
     def setUp(self):
@@ -31,5 +30,14 @@ class test_SG_Client(unittest.TestCase):
         test_name = 'my-sg-name'
         self.sg_client.set_group_name(test_name)
         self.assertEqual(test_name, self.sg_client.getGroupName())
+
+    def test_vpcMultiplesGiven(self):
+        client = Client_Mock(True)
+        sg_test_name = 'my-sg-name'
+        self.sg_client.set_client(client).set_group_name(sg_test_name)
+        self.sg_client.create_sg("vpc-a30ff249b44e63bfe")
+        expectedVpc = "vpc-a30ff249b44e63bfe"
+        choosedVpc = self.sg_client.getVpc()
+        self.assertEquals(expectedVpc, choosedVpc)
 
 

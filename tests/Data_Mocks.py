@@ -913,3 +913,84 @@ class Data_Mocks:
     "RetryAttempts": 0
   }
 }'''
+
+    def get_multiple_vpcs_response(self) -> str:
+        return '''{
+    "Vpcs": [
+        {
+            "CidrBlock": "201.32.1.1/28",
+            "DhcpOptionsId": "dopt-affacddb",
+            "State": "available",
+            "VpcId": "vpc-71d99e528f6bdc8d2",
+            "OwnerId": "505304424871",
+            "InstanceTenancy": "default",
+            "CidrBlockAssociationSet": [
+                {
+                    "AssociationId": "vpc-cidr-assoc-7706dd189b7c817d0",
+                    "CidrBlock": "98.171.1.1/14",
+                    "CidrBlockState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "IsDefault": true
+        },
+        {
+            "CidrBlock": "23.4.1.77/27",
+            "DhcpOptionsId": "dopt-98edb585",
+            "State": "available",
+            "VpcId": "vpc-a30ff249b44e63bfe",
+            "OwnerId": "505304424871",
+            "InstanceTenancy": "default",
+            "CidrBlockAssociationSet": [
+                {
+                    "AssociationId": "vpc-cidr-assoc-2c0b4be471b88f658",
+                    "CidrBlock": "231.90.91.22/25",
+                    "CidrBlockState": {
+                        "State": "associated"
+                    }
+                }
+            ],
+            "IsDefault": false,
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "Unamed"
+                }
+            ]
+        }
+    ],
+    "ResponseMetadata": {
+        "RequestId": "332b77f8-9aeb-29b4-cf55-1b5ebcdefade",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+            "x-amzn-requestid": "332b77f8-9aeb-29b4-cf55-1b5ebcdefade",
+            "cache-control": "no-cache, no-store",
+            "strict-transport-security": "max-age=31536000; includeSubDomains",
+            "content-type": "text/xml;charset=UTF-8",
+            "content-length": "1876",
+            "date": "Thu, 31 Dec 2020 17:26:11 GMT",
+            "server": "AmazonEC2"
+        },
+        "RetryAttempts": 0
+    }
+}'''
+
+    def get_string_response_after_security_group_creation():
+        return '''{
+    "GroupId": "sg-c8ccc93558277d449",
+    "ResponseMetadata": {
+        "RequestId": "4e3cdc20-141a-24b9-8e2b-601390aab01e",
+        "HTTPStatusCode": 200,
+        "HTTPHeaders": {
+            "x-amzn-requestid": "4e3cdc20-141a-24b9-8e2b-601390aab01e",
+            "cache-control": "no-cache, no-store",
+            "strict-transport-security": "max-age=31536000; includeSubDomains",
+            "content-type": "text/xml;charset=UTF-8",
+            "content-length": "11231",
+            "date": "Thu, 31 Dec 2020 22:11:49 GMT",
+            "server": "AmazonEC2"
+        },
+        "RetryAttempts": 0
+    }
+}'''

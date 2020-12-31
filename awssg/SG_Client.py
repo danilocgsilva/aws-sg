@@ -34,7 +34,7 @@ class SG_Client:
         vpcs_containers = vpcs_response.get('Vpcs', [{}])
         # self.validate_vpcs_count(vpcs_containers)
         # self.vpc_id = vpcs_containers[0].get('VpcId', '')
-        self.vpc_id = self.__chooseVpc(vpc, vpcs_containers)
+        self.vpc_id = self.__chooseVpc(vpcs_containers, vpc)
 
     def create_sg(self, vpc = None):
         self.validate_group_name()
@@ -86,6 +86,15 @@ class SG_Client:
     def getGroupName(self) -> str:
         return self.group_name
 
+    def getVpc(self):
+        return self.vpc
+
     def __chooseVpc(self, vpcs_containers, vpc = None):
         if vpc == None:
             return vpcs_containers[0].get('VpcId', '')
+        else:
+            for vpcContainer in vpcs_containers:
+                if vpcContainer.get('VpcId', '') == vpc:
+                    return vpcContainer.get('VpcId', '')
+            raise Exception("An invalid vpc has given.")
+
