@@ -35,5 +35,12 @@ class test_SG_Client(unittest.TestCase):
         choosedVpc = self.sg_client.getVpc()
         self.assertEqual(expectedVpc, choosedVpc)
 
+    def test_vpcMultiplesGivenInvalidOne(self):
+        clientBoto3 = Client_Mock().setMultipleVpcs()
+        sg_test_name = 'my-sg-name'
+        self.sg_client.set_client(clientBoto3).set_group_name(sg_test_name)
+        with self.assertRaises(Exception):
+            self.sg_client.create_sg("vpc-4919cd1632d1d03b6")
+
 if __name__ == '__main__':
     unittest.main()
