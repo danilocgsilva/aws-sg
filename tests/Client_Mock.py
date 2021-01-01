@@ -4,6 +4,13 @@ import json
 
 class Client_Mock(Client_Interface):
 
+    def __init__(self):
+        self.multiple_vpcs = False
+    
+    def setMultipleVpcs(self):
+        self.multiple_vpcs = True
+        return self
+
     def describe_security_groups(self) -> dict:
         data_string = Data_Mocks().get_sample_string_response()
         data = json.loads(data_string)
@@ -30,6 +37,14 @@ class Client_Mock(Client_Interface):
         return data
 
     def describe_vpcs(self) -> dict:
-        data_string = Data_Mocks().get_json_vpcs_string()
+        if self.multiple_vpcs:
+            data_string = Data_Mocks().get_multiple_vpcs_response()
+        else: 
+            data_string = Data_Mocks().get_json_vpcs_string()
+        data = json.loads(data_string)
+        return data
+
+    def create_security_group(self, group_name: str, vpc_id):
+        data_string = Data_Mocks().get_string_response_after_security_group_creation()
         data = json.loads(data_string)
         return data
