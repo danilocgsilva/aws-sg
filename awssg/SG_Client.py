@@ -8,6 +8,7 @@ class SG_Client:
         self.group_name = None
         self.vpc_id = None
         self.groupId = None
+        self.vpcs_containers = []
 
     def set_group_name(self, group_name):
         self.group_name = group_name
@@ -31,10 +32,8 @@ class SG_Client:
 
     def prepare_before_aws(self, vpc = None):
         vpcs_response = self.client.describe_vpcs()
-        vpcs_containers = vpcs_response.get('Vpcs', [{}])
-        # self.validate_vpcs_count(vpcs_containers)
-        # self.vpc_id = vpcs_containers[0].get('VpcId', '')
-        self.vpc_id = self.__chooseVpc(vpcs_containers, vpc)
+        self.vpcs_containers = vpcs_response.get('Vpcs', [{}])
+        self.vpc_id = self.__chooseVpc(vpc)
 
     def create_default_sg(self, vpc = None):
         self.validate_group_name()
@@ -52,7 +51,6 @@ class SG_Client:
             self.try_delete_by_id_or_warn(self.groupId)
         else:
             raise Exception('Tries to delete a group without information about name or id.')
-
     
     def try_delete_by_id_or_warn(self, group_id):
         try:
@@ -64,7 +62,6 @@ class SG_Client:
             else:
                 raise e
 
-    
     def try_delete_by_name_or_warn(self, gruoup_name):
         try:
             self.client.delete_security_group_by_name(gruoup_name)
@@ -74,7 +71,6 @@ class SG_Client:
                 print("Security group with name " + gruoup_name + " does not exists!!!")
             else:
                 raise e
-
 
     def set_rule(self, group_id: str, protocol: str, ip: str, port: str):
         self.prepare_before_aws()
@@ -89,12 +85,15 @@ class SG_Client:
     def getVpc(self):
         return self.vpc_id
 
-    def __chooseVpc(self, vpcs_containers, vpc = None):
-        if vpc == None and len(vpcs_containers) == 1:
-            return vpcs_containers[0].get('VpcId', '')
+    def __chooseVpc(self, vpc = None):
+        if vpc == None and len(self.vpcs_containers) == 1:
+            return self.vpcs_containers[0].get('VpcId', '')
         else:
-            for vpcContainer in vpcs_containers:
+            for vpcContainer in self.vpcs_containers:
                 if vpcContainer.get('VpcId', '') == vpc:
                     return vpcContainer.get('VpcId', '')
             raise Exception("An invalid vpc has given.")
 
+    def is_multiples_vpcs(self) -> bool:
+        # print(self.vpcs_containers)
+        return len(self.vpcs_containers) > 1
