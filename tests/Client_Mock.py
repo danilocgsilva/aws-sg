@@ -9,6 +9,7 @@ class Client_Mock(Client_Interface):
     
     def setMultipleVpcs(self):
         self.multiple_vpcs = True
+        return self
 
     def describe_security_groups(self) -> dict:
         data_string = Data_Mocks().get_sample_string_response()

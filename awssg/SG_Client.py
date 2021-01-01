@@ -37,7 +37,6 @@ class SG_Client:
         self.vpc_id = self.__chooseVpc(vpcs_containers, vpc)
 
     def create_sg(self, vpc = None):
-        print("@@@@@@@@@@@@@@")
         self.validate_group_name()
         self.prepare_before_aws(vpc)
         result_creation = self.client.create_security_group(self.group_name, self.vpc_id)
@@ -88,9 +87,10 @@ class SG_Client:
         return self.group_name
 
     def getVpc(self):
-        return self.vpc
+        return self.vpc_id
 
     def __chooseVpc(self, vpcs_containers, vpc = None):
+
         if vpc == None:
             return vpcs_containers[0].get('VpcId', '')
         else:
