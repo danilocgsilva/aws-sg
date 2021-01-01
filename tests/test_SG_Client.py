@@ -32,12 +32,15 @@ class test_SG_Client(unittest.TestCase):
         self.assertEqual(test_name, self.sg_client.getGroupName())
 
     def test_vpcMultiplesGiven(self):
-        client = Client_Mock(True)
+        clientBoto3 = Client_Mock()
         sg_test_name = 'my-sg-name'
-        self.sg_client.set_client(client).set_group_name(sg_test_name)
+        self.sg_client.set_client(clientBoto3).set_group_name(sg_test_name)
+        print("@@@@@@@@@@@@@")
         self.sg_client.create_sg("vpc-a30ff249b44e63bfe")
+        # self.sg_client.create_sg()
         expectedVpc = "vpc-a30ff249b44e63bfe"
         choosedVpc = self.sg_client.getVpc()
         self.assertEquals(expectedVpc, choosedVpc)
 
-
+if __name__ == '__main__':
+    unittest.main()

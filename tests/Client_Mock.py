@@ -4,8 +4,11 @@ import json
 
 class Client_Mock(Client_Interface):
 
-    def __init__(self, multiple_vpcs = False):
-        self.multiple_vpcs = multiple_vpcs
+    def __init__(self):
+        self.multiple_vpcs = False
+    
+    def setMultipleVpcs(self):
+        self.multiple_vpcs = True
 
     def describe_security_groups(self) -> dict:
         data_string = Data_Mocks().get_sample_string_response()

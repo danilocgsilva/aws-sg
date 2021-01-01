@@ -13,22 +13,18 @@ class test_RDS_Parser(unittest.TestCase):
         rds_data = self.client.describe_db_instances()
         self.rds_parser.set_data(rds_data)
 
-
     def test_correct_type(self):
         rds_lists = self.rds_parser.get_list()
         self.assertTrue(isinstance(rds_lists, list))
-
 
     def test_correct_rds_length(self):
         rds_lists = self.rds_parser.get_list()
         self.assertEqual(1, len(rds_lists))
 
-
     def test_is_element_exists(self):
         existing_element = "myinstance"
         existing_return = self.rds_parser.is_element_exists(existing_element)
         self.assertTrue(existing_return)
-
 
     def test_get_correct_first_occurrence_type(self):
         rds_list = self.rds_parser.get_list()
@@ -53,3 +49,7 @@ class test_RDS_Parser(unittest.TestCase):
         expected_name = "myinstance"
         rds_returned = self.rds_parser.get_rds_by_name(expected_name)
         self.assertEqual(expected_name, rds_returned.get_name())
+
+if __name__ == '__main__':
+    unittest.main()
+    

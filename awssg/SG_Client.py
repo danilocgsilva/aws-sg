@@ -37,6 +37,7 @@ class SG_Client:
         self.vpc_id = self.__chooseVpc(vpcs_containers, vpc)
 
     def create_sg(self, vpc = None):
+        print("@@@@@@@@@@@@@@")
         self.validate_group_name()
         self.prepare_before_aws(vpc)
         result_creation = self.client.create_security_group(self.group_name, self.vpc_id)
