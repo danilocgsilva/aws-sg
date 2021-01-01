@@ -58,5 +58,21 @@ class test_SG_Client(unittest.TestCase):
         with self.assertRaises(Exception):
             self.sg_client.create_default_sg()
 
+    def test_checkVpcAmountsMultiples(self):
+        clientBoto3 = Client_Mock().setMultipleVpcs()
+        sg_test_name = 'my-sg-name'
+        self.sg_client.set_client(clientBoto3).\
+            set_group_name(sg_test_name).\
+            create_default_sg("vpc-a30ff249b44e63bfe")
+        self.assertTrue(self.sg_client.is_multiples_vpcs())
+
+    def test_checkVpcAmountsSingle(self):
+        clientBoto3 = Client_Mock()
+        sg_test_name = 'my-sg-name'
+        self.sg_client.set_client(clientBoto3).\
+            set_group_name(sg_test_name).\
+            create_default_sg()
+        self.assertFalse(self.sg_client.is_multiples_vpcs())
+
 if __name__ == '__main__':
     unittest.main()
