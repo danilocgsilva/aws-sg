@@ -25,19 +25,20 @@ class SG_Client:
         if self.group_name is None:
             raise Exception("You have not setted in group name to this class.")
 
-    def validate_vpcs_count(self, vpcs_containers: dict):
-        if len(vpcs_containers) != 1:
-            raise Exception("You have no or more than a single virtual private cloud in this account, and now this program does not support such situation...")
+    # def validate_vpcs_count(self, vpcs_containers: dict):
+    #     if len(vpcs_containers) != 1:
+    #         raise Exception("You have no or more than a single virtual private cloud in this account, and now this program does not support such situation...")
 
-    def prepare_before_aws(self):
+    def prepare_before_aws(self, vpc = None):
         vpcs_response = self.client.describe_vpcs()
         vpcs_containers = vpcs_response.get('Vpcs', [{}])
-        self.validate_vpcs_count(vpcs_containers)
-        self.vpc_id = vpcs_containers[0].get('VpcId', '')
+        # self.validate_vpcs_count(vpcs_containers)
+        # self.vpc_id = vpcs_containers[0].get('VpcId', '')
+        self.vpc_id = self.__chooseVpc(vpcs_containers, vpc)
 
-    def create_sg(self):
+    def create_default_sg(self, vpc = None):
         self.validate_group_name()
-        self.prepare_before_aws()
+        self.prepare_before_aws(vpc)
         result_creation = self.client.create_security_group(self.group_name, self.vpc_id)
         self.groupId = result_creation["GroupId"]
         return result_creation
@@ -84,3 +85,16 @@ class SG_Client:
 
     def getGroupName(self) -> str:
         return self.group_name
+
+    def getVpc(self):
+        return self.vpc_id
+
+    def __chooseVpc(self, vpcs_containers, vpc = None):
+        if vpc == None and len(vpcs_containers) == 1:
+            return vpcs_containers[0].get('VpcId', '')
+        else:
+            for vpcContainer in vpcs_containers:
+                if vpcContainer.get('VpcId', '') == vpc:
+                    return vpcContainer.get('VpcId', '')
+            raise Exception("An invalid vpc has given.")
+
