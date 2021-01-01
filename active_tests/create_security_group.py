@@ -27,18 +27,6 @@ if args.name == None:
     print("The command has been stoped. You need to provides a name for security group thorugh -n or --name parameter.")
     exit()
 
-# sg_client = SG_Client()
-# security_group_name_to_create = args.name
-# sg_client.set_client(Client()).set_group_name(security_group_name_to_create)
-# results_creation = sg_client.create_sg()
-
-# print(results_creation)
-
-# client = Client()
-# security_group_name_to_create = args.name
-# result_creation = client.create_security_group(security_group_name_to_create, vpc_id)
-# print(result_creation)
-
 boto3Client = boto3.client('ec2')
 
 security_group_name_to_create = args.name

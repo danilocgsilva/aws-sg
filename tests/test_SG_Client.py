@@ -30,7 +30,7 @@ class test_SG_Client(unittest.TestCase):
         clientBoto3 = Client_Mock().setMultipleVpcs()
         sg_test_name = 'my-sg-name'
         self.sg_client.set_client(clientBoto3).set_group_name(sg_test_name)
-        self.sg_client.create_sg("vpc-a30ff249b44e63bfe")
+        self.sg_client.create_default_sg("vpc-a30ff249b44e63bfe")
         expectedVpc = "vpc-a30ff249b44e63bfe"
         choosedVpc = self.sg_client.getVpc()
         self.assertEqual(expectedVpc, choosedVpc)
@@ -40,7 +40,23 @@ class test_SG_Client(unittest.TestCase):
         sg_test_name = 'my-sg-name'
         self.sg_client.set_client(clientBoto3).set_group_name(sg_test_name)
         with self.assertRaises(Exception):
-            self.sg_client.create_sg("vpc-4919cd1632d1d03b6")
+            self.sg_client.create_default_sg("vpc-4919cd1632d1d03b6")
+
+    def test_getDefaultVpc(self):
+        clientBoto3 = Client_Mock()
+        sg_test_name = 'my-sg-name'
+        self.sg_client.set_client(clientBoto3).set_group_name(sg_test_name)
+        self.sg_client.create_default_sg()
+        expectedVpc = "vpc-abcd1234"
+        choosedVpc = self.sg_client.getVpc()
+        self.assertEqual(expectedVpc, choosedVpc)
+
+    def test_setNoVpcWithMultiplesVpcs(self):
+        clientBoto3 = Client_Mock().setMultipleVpcs()
+        sg_test_name = 'my-sg-name'
+        self.sg_client.set_client(clientBoto3).set_group_name(sg_test_name)
+        with self.assertRaises(Exception):
+            self.sg_client.create_default_sg()
 
 if __name__ == '__main__':
     unittest.main()

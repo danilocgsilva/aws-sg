@@ -41,8 +41,6 @@ class Client_Mock(Client_Interface):
             data_string = Data_Mocks().get_multiple_vpcs_response()
         else: 
             data_string = Data_Mocks().get_json_vpcs_string()
-        # print(data_string)
-        # exit()
         data = json.loads(data_string)
         return data
 
