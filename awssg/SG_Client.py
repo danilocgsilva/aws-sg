@@ -7,11 +7,14 @@ class SG_Client:
         self.client = None
         self.group_name = None
         self.vpc_id = None
+        self.input_vpc = None
         self.groupId = None
         self.vpcs_containers = []
 
-    def set_group_name(self, group_name):
+    def set_group_name(self, group_name, vpc = None):
+        self.input_vpc = vpc
         self.group_name = group_name
+        self.prepare_before_aws()
         return self
 
     def set_group_id(self, group_id: str):
@@ -26,18 +29,14 @@ class SG_Client:
         if self.group_name is None:
             raise Exception("You have not setted in group name to this class.")
 
-    # def validate_vpcs_count(self, vpcs_containers: dict):
-    #     if len(vpcs_containers) != 1:
-    #         raise Exception("You have no or more than a single virtual private cloud in this account, and now this program does not support such situation...")
-
-    def prepare_before_aws(self, vpc = None):
+    def prepare_before_aws(self):
         vpcs_response = self.client.describe_vpcs()
         self.vpcs_containers = vpcs_response.get('Vpcs', [{}])
-        self.vpc_id = self.__chooseVpc(vpc)
+        self.vpc_id = self.__chooseVpc()
 
-    def create_default_sg(self, vpc = None):
+    def create_default_sg(self):
         self.validate_group_name()
-        self.prepare_before_aws(vpc)
+        # self.prepare_before_aws()
         result_creation = self.client.create_security_group(self.group_name, self.vpc_id)
         self.groupId = result_creation["GroupId"]
         return result_creation
@@ -85,15 +84,18 @@ class SG_Client:
     def getVpc(self):
         return self.vpc_id
 
-    def __chooseVpc(self, vpc = None):
-        if vpc == None and len(self.vpcs_containers) == 1:
+    def __chooseVpc(self):
+        if self.input_vpc == None and len(self.vpcs_containers) == 1:
             return self.vpcs_containers[0].get('VpcId', '')
         else:
             for vpcContainer in self.vpcs_containers:
-                if vpcContainer.get('VpcId', '') == vpc:
+                if vpcContainer.get('VpcId', '') == self.input_vpc:
                     return vpcContainer.get('VpcId', '')
             raise Exception("An invalid vpc has given.")
 
     def is_multiples_vpcs(self) -> bool:
-        # print(self.vpcs_containers)
+
+        if len(self.vpcs_containers) == 0:
+            raise Exception("No vpc detected.")
+
         return len(self.vpcs_containers) > 1
