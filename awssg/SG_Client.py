@@ -11,10 +11,12 @@ class SG_Client:
         self.groupId = None
         self.vpcs_containers = []
 
-    def set_group_name(self, group_name, vpc = None):
-        self.input_vpc = vpc
+    def set_group_name(self, group_name):
         self.group_name = group_name
-        self.prepare_before_aws()
+        return self
+
+    def set_vpc(self, vpc):
+        self.input_vpc = vpc
         return self
 
     def set_group_id(self, group_id: str):
@@ -36,7 +38,7 @@ class SG_Client:
 
     def create_default_sg(self):
         self.validate_group_name()
-        # self.prepare_before_aws()
+        self.prepare_before_aws()
         result_creation = self.client.create_security_group(self.group_name, self.vpc_id)
         self.groupId = result_creation["GroupId"]
         return result_creation
