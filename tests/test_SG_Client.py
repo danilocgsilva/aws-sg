@@ -77,5 +77,12 @@ class test_SG_Client(unittest.TestCase):
             set_group_name(sg_test_name)
         self.assertFalse(self.sg_client.is_multiples_vpcs())
 
+    def test_list_vpcs(self):
+        clientBoto3 = Client_Mock().setMultipleVpcs()
+        self.sg_client.set_client(clientBoto3)
+        vpcs_list_names = self.sg_client.fetch_vpcs_list_names()
+        self.assertTrue("vpc-71d99e528f6bdc8d2" in vpcs_list_names)
+        self.assertTrue("vpc-a30ff249b44e63bfe" in vpcs_list_names)
+
 if __name__ == '__main__':
     unittest.main()
