@@ -11,10 +11,12 @@ class SG_Client:
         self.groupId = None
         self.vpcs_containers = []
 
-    def set_group_name(self, group_name, vpc = None):
-        self.input_vpc = vpc
+    def set_group_name(self, group_name):
         self.group_name = group_name
-        self.prepare_before_aws()
+        return self
+
+    def set_vpc(self, vpc):
+        self.input_vpc = vpc
         return self
 
     def set_group_id(self, group_id: str):
@@ -32,11 +34,11 @@ class SG_Client:
     def prepare_before_aws(self):
         vpcs_response = self.client.describe_vpcs()
         self.vpcs_containers = vpcs_response.get('Vpcs', [{}])
-        self.vpc_id = self.__chooseVpc()
 
     def create_default_sg(self):
         self.validate_group_name()
-        # self.prepare_before_aws()
+        self.prepare_before_aws()
+        self.vpc_id = self.__chooseVpc()
         result_creation = self.client.create_security_group(self.group_name, self.vpc_id)
         self.groupId = result_creation["GroupId"]
         return result_creation
@@ -94,6 +96,7 @@ class SG_Client:
             raise Exception("An invalid vpc has given.")
 
     def is_multiples_vpcs(self) -> bool:
+        self.prepare_before_aws()
 
         if len(self.vpcs_containers) == 0:
             raise Exception("No vpc detected.")
