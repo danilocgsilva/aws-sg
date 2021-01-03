@@ -32,8 +32,9 @@ class SG_Client:
             raise Exception("You have not setted in group name to this class.")
 
     def prepare_before_aws(self):
-        vpcs_response = self.client.describe_vpcs()
-        self.vpcs_containers = vpcs_response.get('Vpcs', [{}])
+        if len(self.vpcs_containers) == 0:
+            vpcs_response = self.client.describe_vpcs()
+            self.vpcs_containers = vpcs_response.get('Vpcs', [{}])
 
     def create_default_sg(self):
         self.validate_group_name()
@@ -86,14 +87,12 @@ class SG_Client:
     def getVpc(self):
         return self.vpc_id
 
-    def __chooseVpc(self):
-        if self.input_vpc == None and len(self.vpcs_containers) == 1:
-            return self.vpcs_containers[0].get('VpcId', '')
-        else:
-            for vpcContainer in self.vpcs_containers:
-                if vpcContainer.get('VpcId', '') == self.input_vpc:
-                    return vpcContainer.get('VpcId', '')
-            raise Exception("An invalid vpc has given or no vpc has given.")
+    def fetch_vpcs_list_names(self) -> list:
+        list_names = []
+        self.prepare_before_aws()
+        for vpc_data in self.vpcs_containers:
+            list_names.append(vpc_data["VpcId"])
+        return list_names
 
     def is_multiples_vpcs(self) -> bool:
         self.prepare_before_aws()
@@ -102,3 +101,12 @@ class SG_Client:
             raise Exception("No vpc detected.")
 
         return len(self.vpcs_containers) > 1
+
+    def __chooseVpc(self):
+        if self.input_vpc == None and len(self.vpcs_containers) == 1:
+            return self.vpcs_containers[0].get('VpcId', '')
+        else:
+            for vpcContainer in self.vpcs_containers:
+                if vpcContainer.get('VpcId', '') == self.input_vpc:
+                    return vpcContainer.get('VpcId', '')
+            raise Exception("An invalid vpc has given or no vpc has given.")
