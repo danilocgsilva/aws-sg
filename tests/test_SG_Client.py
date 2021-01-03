@@ -68,8 +68,7 @@ class test_SG_Client(unittest.TestCase):
         clientBoto3 = Client_Mock().setMultipleVpcs()
         sg_test_name = 'my-sg-name'
         self.sg_client.set_client(clientBoto3).\
-            set_group_name(sg_test_name, ).\
-            set_vpc("vpc-71d99e528f6bdc8d2")
+            set_group_name(sg_test_name)
         self.assertTrue(self.sg_client.is_multiples_vpcs())
 
     def test_checkVpcAmountsSingle(self):
