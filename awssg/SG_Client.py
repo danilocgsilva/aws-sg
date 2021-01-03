@@ -93,7 +93,7 @@ class SG_Client:
             for vpcContainer in self.vpcs_containers:
                 if vpcContainer.get('VpcId', '') == self.input_vpc:
                     return vpcContainer.get('VpcId', '')
-            raise Exception("An invalid vpc has given.")
+            raise Exception("An invalid vpc has given or no vpc has given.")
 
     def is_multiples_vpcs(self) -> bool:
         self.prepare_before_aws()

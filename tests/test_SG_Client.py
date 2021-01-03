@@ -4,7 +4,6 @@ import sys
 sys.path.insert(1, "..")
 from awssg.SG_Client import SG_Client
 from tests.Client_Mock import Client_Mock
-
 class test_SG_Client(unittest.TestCase):
 
     def setUp(self):
