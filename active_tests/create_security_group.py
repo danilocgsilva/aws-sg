@@ -2,7 +2,7 @@ import sys
 import argparse
 import boto3
 sys.path.insert(1, '..')
-from awssg.Client_Config import Client_Config
+# from awssg.Client_Config import Client_Config
 from awssg.Helpers import fast_add_arguments
 import os
 
@@ -12,7 +12,7 @@ if not response == "yes":
     print("Cancelling...")
     exit()
 
-client_config = Client_Config()
+# client_config = Client_Config()
 
 arguments_list = [
     ['--profile', '-p'],
