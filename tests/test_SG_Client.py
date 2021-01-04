@@ -4,7 +4,6 @@ import sys
 sys.path.insert(1, "..")
 from awssg.SG_Client import SG_Client
 from tests.Client_Mock import Client_Mock
-
 class test_SG_Client(unittest.TestCase):
 
     def setUp(self):
@@ -29,7 +28,10 @@ class test_SG_Client(unittest.TestCase):
     def test_vpcMultiplesGiven(self):
         clientBoto3 = Client_Mock().setMultipleVpcs()
         sg_test_name = 'my-sg-name'
-        self.sg_client.set_client(clientBoto3).set_group_name(sg_test_name, "vpc-a30ff249b44e63bfe")
+        self.sg_client\
+            .set_client(clientBoto3)\
+            .set_group_name(sg_test_name)\
+            .set_vpc("vpc-a30ff249b44e63bfe")
         self.sg_client.create_default_sg()
         expectedVpc = "vpc-a30ff249b44e63bfe"
         choosedVpc = self.sg_client.getVpc()
@@ -39,8 +41,10 @@ class test_SG_Client(unittest.TestCase):
         clientBoto3 = Client_Mock().setMultipleVpcs()
         sg_test_name = 'my-sg-name'
         self.sg_client.set_client(clientBoto3)
+        self.sg_client.set_group_name(sg_test_name)
+        self.sg_client.set_vpc("vpc-4919cd1632d1d03b6")
         with self.assertRaises(Exception):
-            self.sg_client.set_group_name(sg_test_name, "vpc-4919cd1632d1d03b6")
+            self.sg_client.create_default_sg()
 
     def test_getDefaultVpc(self):
         clientBoto3 = Client_Mock()
@@ -55,15 +59,15 @@ class test_SG_Client(unittest.TestCase):
         clientBoto3 = Client_Mock().setMultipleVpcs()
         sg_test_name = 'my-sg-name'
         self.sg_client.set_client(clientBoto3)
+        self.sg_client.set_group_name(sg_test_name)
         with self.assertRaises(Exception):
-            self.sg_client.set_group_name(sg_test_name)
-            # self.sg_client.create_default_sg()
+            self.sg_client.create_default_sg()
 
     def test_checkVpcAmountsMultiples(self):
         clientBoto3 = Client_Mock().setMultipleVpcs()
         sg_test_name = 'my-sg-name'
         self.sg_client.set_client(clientBoto3).\
-            set_group_name(sg_test_name, "vpc-71d99e528f6bdc8d2")
+            set_group_name(sg_test_name)
         self.assertTrue(self.sg_client.is_multiples_vpcs())
 
     def test_checkVpcAmountsSingle(self):
@@ -72,6 +76,13 @@ class test_SG_Client(unittest.TestCase):
         self.sg_client.set_client(clientBoto3).\
             set_group_name(sg_test_name)
         self.assertFalse(self.sg_client.is_multiples_vpcs())
+
+    def test_list_vpcs(self):
+        clientBoto3 = Client_Mock().setMultipleVpcs()
+        self.sg_client.set_client(clientBoto3)
+        vpcs_list_names = self.sg_client.fetch_vpcs_list_names()
+        self.assertTrue("vpc-71d99e528f6bdc8d2" in vpcs_list_names)
+        self.assertTrue("vpc-a30ff249b44e63bfe" in vpcs_list_names)
 
 if __name__ == '__main__':
     unittest.main()
