@@ -4,6 +4,7 @@ import boto3
 sys.path.insert(1, '..')
 from awssg.Client_Config import Client_Config
 from awssg.Helpers import fast_add_arguments
+import os
 
 print("This action will create a real security group in your infraestructure, just to show the output results.")
 response = input("Are you sure to do so? Type yes. Otherwise, the action will be canceled: ")
@@ -27,7 +28,9 @@ if args.name == None:
     print("The command has been stoped. You need to provides a name for security group thorugh -n or --name parameter.")
     exit()
 
-boto3Client = boto3.client('ec2')
+boto3Client = boto3.client('ec2', region_name=args.region)
+
+
 
 security_group_name_to_create = args.name
 
