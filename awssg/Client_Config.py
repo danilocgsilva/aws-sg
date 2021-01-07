@@ -8,11 +8,9 @@ class Client_Config(Client_Config_Interface):
         os.environ['AWS_DEFAULT_REGION'] = region
         return self
 
-
     def set_profile(self, profile):
         os.environ['AWS_PROFILE'] = profile
         return self
-
 
     def get_client(self):
         return Client()

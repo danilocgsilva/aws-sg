@@ -1,0 +1,2 @@
+-e git+https://github.com/danilocgsilva/danilocgsilvamepythonhelpers.git@master#egg=danilocgsilvame_python_helpers
+-e git+https://github.com/danilocgsilva/ask_list.git@main#egg=dcgsasklist
