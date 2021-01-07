@@ -1,9 +1,11 @@
-from awssg.SG_Client import SG_Client
 from awssg.Client import Client
+from awssg.Helpers import fast_add_arguments
+from awssg.SG_Client import SG_Client
 from danilocgsilvame_python_helpers.DcgsPythonHelpers import DcgsPythonHelpers
 from dcgsasklist.Ask import Ask
 from dcgsasklist.AskException import AskException
 import datetime
+import argparse
 
 print("This action will create a real security group in your infraestructure, just to show the output results.")
 response = input("Are you sure to do so? Type yes. Otherwise, the action will be canceled: ")
@@ -11,7 +13,7 @@ if not response == "yes":
     print("Cancelling...")
     exit()
 
-client_config = Client_Config()
+# client_config = Client_Config()
 
 arguments_list = [
     ['--profile', '-p'],
@@ -42,4 +44,4 @@ if sg_client.is_multiples_vpcs():
     sg_client.set_vpc(vpc_choosed)
 
 results_creation = sg_client.create_default_sg()
-print(results)
+print(results_creation)

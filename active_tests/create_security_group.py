@@ -2,9 +2,17 @@ import sys
 import argparse
 import boto3
 sys.path.insert(1, '..')
-from awssg.Client_Config import Client_Config
+# from awssg.Client_Config import Client_Config
 from awssg.Helpers import fast_add_arguments
 import os
+
+print("This action will create a real security group in your infraestructure, just to show the output results.")
+response = input("Are you sure to do so? Type yes. Otherwise, the action will be canceled: ")
+if not response == "yes":
+    print("Cancelling...")
+    exit()
+
+# client_config = Client_Config()
 
 arguments_list = [
     ['--profile', '-p'],
