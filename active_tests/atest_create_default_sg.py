@@ -39,9 +39,8 @@ if args.region:
     client_config.set_region(args.region)
 
 ec2 = Client()
-group_name = 'securitygroup-at-' + DcgsPythonHelpers().getHashDateFromDate(datetime.datetime.now())
 sg_client = SG_Client()
-sg_client.set_client(ec2).set_group_name(group_name)
+sg_client.set_client(ec2).set_group_name(args.name)
 if sg_client.is_multiples_vpcs():
     ask = Ask( sg_client.fetch_vpcs_list_names() )
     vpc_choosed = None
