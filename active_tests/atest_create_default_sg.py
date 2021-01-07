@@ -35,6 +35,9 @@ if not response == "yes":
 
 client_config = Client_Config()
 
+if args.region:
+    client_config.set_region(args.region)
+
 ec2 = Client()
 group_name = 'securitygroup-at-' + DcgsPythonHelpers().getHashDateFromDate(datetime.datetime.now())
 sg_client = SG_Client()
