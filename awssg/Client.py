@@ -82,6 +82,10 @@ class Client(Client_Interface):
         else:
             raise Exception("The account have no Vpc!")
 
+    def fetch_vpcs_list_names(self) -> list:
+        self.__fill_vpc_data_if_empty()
+        return map(lambda item : item["VpcId"], self.vpcs_data)
+
     def __fill_vpc_data_if_empty(self):
         if self.vpcs_data != None:
             self.vpcs_data = self.ec2_client.describe_vpcs()
