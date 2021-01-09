@@ -57,11 +57,16 @@ class Client(Client_Interface):
     def describe_specific_security_group_by_id(self, sg_id: str):
         return self.ec2_client.describe_security_groups(GroupIds=[sg_id])
 
-    def getSubnetId(self, vpc_id):
+    def get_first_subnet(self, vpc_id):
         subnets = self.ec2_client.describe_subnets(
             Filters=[{
                 "Name": "vpc-id",
                 "Values": [vpc_id]
             }]
         )
-        return subnets
+
+        if not len(subnets["Subnets"]) == 1:
+            raise Exception("This vpc has multiples subnets and cannod handle this situation.")
+
+        return subnets["Subnets"][0]["SubnetId"]
+

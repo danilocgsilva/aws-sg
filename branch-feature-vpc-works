@@ -1,4 +1,4 @@
 There is needed:
-* get_first_vpc methods
+* get_first_subnet methods
 * is_multiples_vpcs method
 * fetch_vpcs_list_names method
