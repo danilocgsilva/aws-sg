@@ -56,3 +56,12 @@ class Client(Client_Interface):
 
     def describe_specific_security_group_by_id(self, sg_id: str):
         return self.ec2_client.describe_security_groups(GroupIds=[sg_id])
+
+    def getSubnetId(self, vpc_id):
+        subnets = self.ec2_client.describe_subnets(
+            Filters=[{
+                "Name": "vpc-id",
+                "Values": [vpc_id]
+            }]
+        )
+        return subnets
