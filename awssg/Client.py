@@ -84,10 +84,12 @@ class Client(Client_Interface):
 
     def fetch_vpcs_list_names(self) -> list:
         self.__fill_vpc_data_if_empty()
-        return map(lambda item : item["VpcId"], self.vpcs_data)
+
+        return list(
+            map(lambda item : item["VpcId"], self.vpcs_data["Vpcs"])
+        )
 
     def __fill_vpc_data_if_empty(self):
-        if self.vpcs_data != None:
+        if self.vpcs_data == None:
             self.vpcs_data = self.ec2_client.describe_vpcs()
-        
 

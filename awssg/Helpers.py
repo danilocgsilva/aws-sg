@@ -30,7 +30,6 @@ def readable_single_region_data(region: str, client_config: Client_Config_Interf
 
     return readable_string
 
-
 def fast_add_arguments(arguments: list, parser):
 
     for argument in arguments:
@@ -42,7 +41,6 @@ def fast_add_arguments(arguments: list, parser):
         )        
 
     return parser
-
 
 def get_regions(client: Client) -> list:
     regions_parser = Regions_Parser()
@@ -56,13 +54,11 @@ def readable_loop_regions_securities_groups(client_config: Client_Config, fields
         print("Region: " + region)
         print(readable_single_region_data(region, client_config))
 
-
 def print_securities_groups(args, client_config):
     if args.region:
         print(readable_single_region_data(args.region, client_config, args.fields))
     else:
         readable_loop_regions_securities_groups(client_config, args.fields)
-
 
 def print_securities_groups_from_rds_instance(rds_name):
     
@@ -78,17 +74,14 @@ def print_securities_groups_from_rds_instance(rds_name):
         for sg_name in rds.get_securities_groups_names():
             print("\t" + sg_name)
 
-
 def get_hash_date_from_date(datetime_data):
     return str(datetime_data.year) + '{0:02}'.format(datetime_data.month) + '{0:02}'.format(datetime_data.day) + '-' + '{0:02}'.format(datetime_data.hour) + 'h' + '{0:02}'.format(datetime_data.minute) + 'm' + '{0:02}'.format(datetime_data.second) + 's' + str(datetime_data.microsecond)
-
 
 def list_sg(args, client_config):
     if args.rds is not None:
         print_securities_groups_from_rds_instance(args.rds)
     else:
         print_securities_groups(args, client_config)
-
 
 def create_sg(args):
     group_name = args.create + get_hash_date_from_date(datetime.datetime.now())
