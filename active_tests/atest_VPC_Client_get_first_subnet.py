@@ -1,4 +1,4 @@
-from awssg.Client import Client
+from awssg.VPC_Client import VPC_Client
 from awssg.Helpers import fast_add_arguments
 from awssg.Client_Config import Client_Config
 from danilocgsilvame_python_helpers.DcgsPythonHelpers import DcgsPythonHelpers
@@ -27,9 +27,9 @@ os.environ["AWS_PROFILE"] = args.profile
 
 Client_Config().set_region(args.region)
 
-client = Client()
+vpc_client = VPC_Client()
 
-results = client.get_first_subnet(args.vpc)
+results = vpc_client.get_first_subnet(args.vpc)
 
 print(results)
 
