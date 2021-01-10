@@ -1,5 +1,5 @@
-from awssg.Client import Client
 from awssg.Client_Config import Client_Config
+from awssg.VPC_Client import VPC_Client
 from danilocgsilvame_python_helpers.DcgsPythonHelpers import DcgsPythonHelpers
 import os
 
@@ -20,7 +20,7 @@ os.environ["AWS_PROFILE"] = args.profile
 
 Client_Config().set_region(args.region)
 
-client = Client()
+client = VPC_Client()
 results = client.fetch_vpcs_list_names()
 
 for result in results:
