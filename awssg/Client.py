@@ -19,10 +19,6 @@ class Client(Client_Interface):
     def describe_specific_security_group(self, security_group: str):
         return self.ec2_client.describe_security_groups(GroupNames=[security_group])
 
-    def describe_vpcs(self) -> dict:
-        self.__fill_vpc_data_if_empty()
-        return self.vpcs_data
-
     def create_security_group(self, group_name: str, vpc_id: str):
         return self.ec2_client.create_security_group(
             GroupName=group_name,
