@@ -1,4 +1,5 @@
 from awssg.Client_Interface import Client_Interface
+from awssg.VPC_Client import VPC_Client
 import boto3
 
 class Client(Client_Interface):
@@ -50,6 +51,9 @@ class Client(Client_Interface):
             FromPort=int(port),
             ToPort=int(port)
         )
+
+    def describe_vpcs(self):
+        return VPC_Client().describe_vpcs()
 
     def describe_specific_security_group_by_id(self, sg_id: str):
         return self.ec2_client.describe_security_groups(GroupIds=[sg_id])
