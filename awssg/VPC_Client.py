@@ -36,6 +36,10 @@ class VPC_Client:
             map(lambda item : item["VpcId"], self.vpcs_data["Vpcs"])
         )
 
+    def describe_vpcs(self):
+        self.__fill_vpc_data_if_empty()
+        return self.vpcs_data
+
     def __fill_vpc_data_if_empty(self):
         if self.vpcs_data == None:
             self.vpcs_data = self.ec2_client.describe_vpcs()
