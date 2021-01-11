@@ -7,6 +7,10 @@ class VPC_Client:
         self.ec2_client = boto3.client('ec2')
 
     def get_first_subnet(self, vpc_id):
+
+        if not vpc_id:
+            raise Exception("The vpc value must not be None.")
+
         subnets = self.ec2_client.describe_subnets(
             Filters=[{
                 "Name": "vpc-id",
