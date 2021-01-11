@@ -40,6 +40,10 @@ class VPC_Client:
         self.__fill_vpc_data_if_empty()
         return self.vpcs_data
 
+    def get_first_vpc_name(self):
+        self.__fill_vpc_data_if_empty()
+        self.vpcs_data["Vpcs"][0]["VpcId"]
+
     def __fill_vpc_data_if_empty(self):
         if self.vpcs_data == None:
             self.vpcs_data = self.ec2_client.describe_vpcs()
