@@ -44,9 +44,12 @@ class VPC_Client:
         self.__fill_vpc_data_if_empty()
         return self.vpcs_data
 
-    def get_first_vpc_name(self):
+    def get_first_vpc_name(self) -> str:
         self.__fill_vpc_data_if_empty()
-        self.vpcs_data["Vpcs"][0]["VpcId"]
+        first_vpc = self.vpcs_data["Vpcs"][0]["VpcId"]
+        if first_vpc == None:
+            raise Exception("Sorry, I could not discover the first vpc name.")
+        return first_vpc
 
     def __fill_vpc_data_if_empty(self):
         if self.vpcs_data == None:
