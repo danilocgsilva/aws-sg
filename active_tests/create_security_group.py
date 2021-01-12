@@ -2,19 +2,15 @@ import sys
 import argparse
 import boto3
 sys.path.insert(1, '..')
-# from awssg.Client_Config import Client_Config
+from danilocgsilvame_python_helpers.DcgsPythonHelpers import DcgsPythonHelpers
 from awssg.Helpers import fast_add_arguments
 import os
 
-arguments_list = [
-    ['--profile', '-p'],
-    ['--region', '-r'],
-    ['--name', '-n']
-]
-
-parser = argparse.ArgumentParser()
-parser = fast_add_arguments(arguments_list, parser)
-args = parser.parse_args()
+args = DcgsPythonHelpers().command_line_argument_names(
+    'profile', 'p',
+    'region', 'r',
+    'name', 'n'
+)
 
 if args.name == None:
     print("The command has been stoped. You need to provides a name for security group thorugh -n or --name parameter.")
@@ -28,8 +24,6 @@ response = input("Are you sure to do so? Type yes. Otherwise, the action will be
 if not response == "yes":
     print("Cancelling...")
     exit()
-
-# client_config = Client_Config()
 
 boto3Client = boto3.client('ec2', region_name=args.region)
 
