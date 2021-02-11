@@ -18,6 +18,7 @@ if not args.profile:
 
 os.environ["AWS_PROFILE"] = args.profile
 
+
 client_config = Client_Config()
 
 if args.profile is not None:
