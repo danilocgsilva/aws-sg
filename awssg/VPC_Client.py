@@ -1,4 +1,5 @@
 import boto3
+from dcgsasklist.Ask import Ask
 
 class VPC_Client:
 
@@ -19,9 +20,16 @@ class VPC_Client:
         )
 
         if not len(subnets["Subnets"]) == 1:
-            raise Exception("This vpc has multiples subnets and cannod handle this situation.")
 
-        return subnets["Subnets"][0]["SubnetId"]
+            subnet_names = []
+            for singleSubnet in subnets["Subnets"]:
+                subnet_names.append(singleSubnet["SubnetId"])
+            ask = Ask(subnet_names)
+            subnet = ask.ask("There are multiples subnets in your VPC. Type what subnet did you desire: ")
+        else:
+            subnet = subnets["Subnets"][0]["SubnetId"]
+
+        return subnet
 
     def is_multiples_vpcs(self) -> bool:
         self.__fill_vpc_data_if_empty()
