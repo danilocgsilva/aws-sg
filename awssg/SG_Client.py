@@ -102,6 +102,13 @@ class SG_Client:
 
         return len(self.vpcs_containers) > 1
 
+    def getSubnetId(self) -> str:
+
+        if not self.client:
+            raise Exception("You need first assing a client to this class.")
+
+        return self.client.getSubnetId(self.vpc_id)
+
     def __chooseVpc(self):
         if self.input_vpc == None and len(self.vpcs_containers) == 1:
             return self.vpcs_containers[0].get('VpcId', '')

@@ -1,0 +1,2 @@
+Fix postion from get_first_subnet, is_multiples_vpcs and fetch_vpcs_list_names, introduced by branch-feature-vpc-works.
+This methods must resids in a more specialized class other tham the Client.
