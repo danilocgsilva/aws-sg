@@ -7,7 +7,7 @@ def readme():
         return file.read()
 
 setup(
-    name="aws-sg",
+    name="awssg",
     version=VERSION,
     description="Allows activities directly in your AWS securities groups",
     long_description_content_type="text/makrdown",
