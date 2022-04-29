@@ -1,5 +1,5 @@
 import boto3
-from dcgsasklist.Ask import Ask
+from cli_ask.Ask import Ask
 
 class VPC_Client:
 
