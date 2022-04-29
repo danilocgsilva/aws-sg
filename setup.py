@@ -1,13 +1,13 @@
 from setuptools import setup
 
-VERSION = '1.11.0'
+VERSION = '1.12.0'
 
 def readme():
     with open("README.md") as file:
         return file.read()
 
 setup(
-    name="aws-sg",
+    name="awssg",
     version=VERSION,
     description="Allows activities directly in your AWS securities groups",
     long_description_content_type="text/makrdown",
