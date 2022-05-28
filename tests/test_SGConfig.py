@@ -43,3 +43,6 @@ class test_SGConfig(unittest.TestCase):
             self.expected_name,
             self.sGConfig.getName()
         )
+
+if __name__ == '__main__':
+    unittest.main()

@@ -3,9 +3,15 @@ from cli_ask.Ask import Ask
 
 class VPC_Client:
 
-    def __init__(self):
+    def __init__(self, ec2_client=None):
         self.vpcs_data = None
-        self.ec2_client = boto3.client('ec2')
+        if not ec2_client:
+            self.ec2_client = boto3.client('ec2')
+        else:
+            self.ec2_client = ec2_client
+
+    def set_ec2_client(self, ec2_client):
+        self.ec2_client = ec2_client
 
     def get_first_subnet(self, vpc_id):
 
@@ -58,6 +64,10 @@ class VPC_Client:
         if first_vpc == None:
             raise Exception("Sorry, I could not discover the first vpc name.")
         return first_vpc
+
+    def vpc_exists(self, vpc_id: str) -> bool:
+        vpcs_strings = self.fetch_vpcs_list_names()
+        return vpc_id in vpcs_strings
 
     def __fill_vpc_data_if_empty(self):
         if self.vpcs_data == None:
