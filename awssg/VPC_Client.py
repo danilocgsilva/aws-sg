@@ -25,17 +25,10 @@ class VPC_Client:
             }]
         )
 
-        if not len(subnets["Subnets"]) == 1:
+        if len(subnets["Subnets"]) == 0:
+            raise Exception("The current vpc does not have any subnet.")
 
-            subnet_names = []
-            for singleSubnet in subnets["Subnets"]:
-                subnet_names.append(singleSubnet["SubnetId"])
-            ask = Ask(subnet_names)
-            subnet = ask.ask("There are multiples subnets in your VPC. Type what subnet did you desire: ")
-        else:
-            subnet = subnets["Subnets"][0]["SubnetId"]
-
-        return subnet
+        return subnets["Subnets"][0]["SubnetId"]
 
     def is_multiples_vpcs(self) -> bool:
         self.__fill_vpc_data_if_empty()
