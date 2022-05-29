@@ -39,7 +39,7 @@ class SG_Client:
     def create_default_sg(self):
         self.validate_group_name()
         self.prepare_before_aws()
-        self.vpc_id = self.__chooseVpc()
+        self.vpc_id = self.__guessVPC()
         result_creation = self.client.create_security_group(self.group_name, self.vpc_id)
         self.groupId = result_creation["GroupId"]
         return result_creation
@@ -109,10 +109,14 @@ class SG_Client:
 
         return self.client.getSubnetId(self.vpc_id)
 
-    def __chooseVpc(self):
+    def __guessVPC(self):
         if self.input_vpc == None and len(self.vpcs_containers) == 1:
             return self.vpcs_containers[0].get('VpcId', '')
         else:
+
+            if not self.input_vpc:
+                raise Exception("There are multiples vpcs. In this case, you need to choose one explicitly. Use the method set_vpc from this object.")
+
             for vpcContainer in self.vpcs_containers:
                 if vpcContainer.get('VpcId', '') == self.input_vpc:
                     return vpcContainer.get('VpcId', '')
